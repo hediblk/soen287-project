@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style2.css" />
+    <link rel="stylesheet" href="normlize.css" />
+    <title>Login</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <img class="logo" src="logo.jpg" alt="" />
+        <p>Clean Choice</p>
+      </div>
+    </header>
+
+    
+    <div class="main-login">
+      <div class="login-container">
+        <h2>Login</h2>
+        <form action="/submit-login" method="POST">
+          <div class="input-field">
+            <label for="username">User Name:</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+
+          <div class="input-field">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+
+          <button type="submit" class="login-btn">Login</button>
+
+          <a href="#" class="forgot-password">Forgot Password?</a>
+          <a href="companyAccount.html" class="new-account">Don't have an account?</a>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <div>
+        <p>© 2024 <span>Clean Choice</span> - All Rights Reserved</p>
+      </div>
+    </footer>
+  </body>
+</html>
