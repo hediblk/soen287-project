@@ -3,41 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="normlize.css" />
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="./output.css" rel="stylesheet">
     <title>Clean Choice</title>
   </head>
 
-  <body>
-    <header class="header" >
-      <div class="container">
-        <img class="logo" src="logo.jpg" alt="">
-        <h1>Clean Choice</h1>
-      </div>
-    </header>
 
-    <div class="container" id="content">
-      <div class="item">
-        <p>
-          Are you a company looking to sell your cleaning services? We are here
-          to HELP!!
-        </p>
-        <a href="companyLogin.html">I am a <br />Business</a>
-      </div>
-      <div class="item">
-        <p>
-          Are you looking for a cleaning company to offer you the best services
-          ever? WE GOT YOU!!
-        </p>
-        <a href="customerLogin.html">I am a <br />Consumer</a>
-      </div>
+<body class="flex flex-col min-h-screen bg-gray-100">
+  
+  <!-- Header Section -->
+  <header class="header bg-white py-2 md:py-4">
+    <div class="container mx-auto flex items-center space-x-4">
+      <img class="logo h-8 w-8 md:h-12 md:w-12" src="logo.jpg" alt="Clean Choice Logo">
+      <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7;">Clean Choice</h1>
     </div>
+  </header>
 
-    <footer>
-      <div>
-        <p>© 2024 <span>Clean Choice</span> - All Rights Reserved</p>
-      </div>
-    </footer>
-  </body>
+ <!-- Main Content Section -->
+ <div class="container mx-auto flex-grow p-4 md:p-8 flex items-center justify-center" id="content">
+  <div class="flex space-x-4">
+    <div class="item flex flex-col items-center mb-6">
+      <p class="italic text-[#777] text-center text-base md:text-lg">
+        Are you a company looking to sell your cleaning services? We are here to HELP!!
+      </p>
+      <a href="companyLogin.html"  class="block text-center bg-[#2c4755] text-white px-6 py-3 rounded-md hover:text-emerald-400 transition-colors duration-200 mt-4">I am a <br> Business</a>
+    </div>  
+    <div class="item flex flex-col items-center mb-6">
+      <p class="italic text-[#777] text-center text-base md:text-lg">
+        Are you looking for a cleaning company to offer you the best services ever? WE GOT YOU!!
+      </p>
+      <a href="customerLogin.html" class="block text-center bg-[#2c4755] text-white px-6 py-3 rounded-md hover:text-emerald-400 transition-colors duration-200 mt-4">I am a <br> Consumer</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  <!-- Footer Section -->
+  <footer class="py-2 md:py-4 text-center bg-[#2c4755]">
+    <p class="text-white">© 2024 <span style="color: #10cab7;">Clean Choice</span> - All Rights Reserved</p>
+  </footer>
+</body>
+
+
+
+  
+
 </html>

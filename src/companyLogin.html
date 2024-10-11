@@ -3,45 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style2.css" />
+    <!-- <link rel="stylesheet" href="style2.css" /> -->
+  
     <link rel="stylesheet" href="normlize.css" />
+    <link href="./output.css" rel="stylesheet">
     <title>Login</title>
   </head>
-  <body>
-    <header class="header">
-      <div class="container">
-        <img class="logo" src="logo.jpg" alt="" />
-        <p>Clean Choice</p>
-      </div>
-    </header>
 
-    
-    <div class="main-login">
-      <div class="login-container">
-        <h2>Login</h2>
+
+  <body class="flex flex-col min-h-screen bg-gray-100">
+
+     <!-- Header Section -->
+  <header class="header bg-white py-2 md:py-4">
+    <div class="container mx-auto flex items-center space-x-4">
+      <img class="logo h-8 w-8 md:h-12 md:w-12" src="logo.jpg" alt="Clean Choice Logo">
+      <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7;">Clean Choice</h1>
+    </div>
+  </header>
+
+
+    <div class="flex-grow flex items-center justify-center p-4 md:p-8">
+      <div class="login-container bg-white rounded-lg shadow-md p-8 w-full max-w-md">
+        <h2 class="text-2xl font-semibold mb-6 text-center">Login</h2>
         <form action="/submit-login" method="POST">
-          <div class="input-field">
-            <label for="username">User Name:</label>
-            <input type="text" id="username" name="username" required />
+          <div class="input-field mb-4">
+            <label for="username" class="block text-gray-700 font-medium mb-1">User Name:</label>
+            <input 
+              type="text" 
+              id="username" 
+              name="username" 
+              required 
+              class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200" 
+            />
           </div>
-
-          <div class="input-field">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required />
+    
+          <div class="input-field mb-6">
+            <label for="password" class="block text-gray-700 font-medium mb-1">Password:</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              required 
+              class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200" 
+            />
           </div>
-
-          <button type="submit" class="login-btn">Login</button>
-
-          <a href="#" class="forgot-password">Forgot Password?</a>
-          <a href="companyAccount.html" class="new-account">Don't have an account?</a>
+    
+          <button 
+            type="submit" 
+            class="login-btn w-full bg-teal-600 text-white py-2 rounded-md hover:bg-teal-700 transition duration-200">
+            Login
+          </button>
+    
+          <div class="mt-4 flex flex-col items-center">
+            <a href="#" class="forgot-password text-teal-600 hover:underline mt-2">Forgot Password?</a>
+            <a href="companyAccount.html" class="new-account text-teal-600 hover:underline mt-2">Don't have an account?</a>
+          </div>
         </form>
       </div>
     </div>
 
-    <footer>
-      <div>
-        <p>© 2024 <span>Clean Choice</span> - All Rights Reserved</p>
-      </div>
-    </footer>
+
+      <!-- Footer Section -->
+      <footer class="py-2 md:py-4 text-center bg-[#2c4755]">
+        <p class="text-white">© 2024 <span style="color: #10cab7;">Clean Choice</span> - All Rights Reserved</p>
+      </footer>
   </body>
+
+
 </html>
