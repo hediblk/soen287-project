@@ -25,8 +25,8 @@ jspm_packages/
 .env
 
 # Tailwind CSS build artifacts
-src/output.css
-src/output.css.map
+src/styles/output.css
+src/styles/output.css.map
 
 # IDE specific files
 .vscode/
