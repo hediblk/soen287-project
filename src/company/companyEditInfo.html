@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Company Information</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <body class="flex flex-col min-h-screen bg-gray-100">
+        <!-- Header Section -->
+            <header class="header bg-white py-2 md:py-4">
+              <div class="container mx-auto flex items-center space-x-4">
+                <img class="logo h-8 w-8 md:h-12 md:w-12" src="../assets/logo.jpg" alt="Clean Choice Logo" />
+                <a href="../landingPage.html">
+                  <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">Clean Choice</h1>
+                </a>
+              </div>
+            </header>
+    
+
+    <h1>Edit Company Information</h1>
+
+    <form id="company-info-form">
+        <!-- Company Name -->
+        <label for="company-name">Company Name:</label>
+        <input type="text" id="company-name" placeholder="Enter company name" required><br><br>
+
+        <!-- Company Logo -->
+        <label for="company-logo">Upload Logo (JPEG):</label>
+        <input type="file" id="company-logo" accept="image/jpeg" required><br><br>
+
+        <!-- Company Address -->
+        <label for="company-address">Company Address:</label><br>
+        <textarea id="company-address" rows="4" placeholder="Enter company address" required></textarea><br><br>
+
+        <button type="submit">Save Information</button>
+    </form>
+
+    <div id="display-info">
+        <h2>Current Company Information</h2>
+        <p><strong>Name:</strong> <span id="display-company-name"></span></p>
+        <p><strong>Address:</strong> <span id="display-company-address"></span></p>
+        <img id="display-company-logo" alt="Company Logo" style="max-width: 200px;">
+    </div>
+
+    <script src="..\js\companyInformation.js"></script>
+
+      <!-- Footer Section -->
+      <footer class="py-2 md:py-4 text-center bg-[#2c4755]">
+        <p class="text-white">
+          © 2024
+          <span style="color: #10cab7">Clean Choice</span>
+          - All Rights Reserved
+        </p>
+      </footer>
+</body>
+</html>
