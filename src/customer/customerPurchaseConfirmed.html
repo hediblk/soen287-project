@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/normlize.css" />
+    <link href="../styles/output.css" rel="stylesheet" />
+    <title>Purchase Confirmation</title>
+
+    <body class="flex flex-col min-h-screen bg-gray-100">
+        <!-- Header Section -->
+        <header class="header bg-white py-2 md:py-4">
+          <div class="container mx-auto flex items-center space-x-4">
+            <img class="logo h-8 w-8 md:h-12 md:w-12" src="../assets/logo.jpg" alt="Clean Choice Logo" />
+            <a href="../landingPage.html">
+              <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">Clean Choice</h1>
+            </a>
+          </div>
+        </header>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+        .confirmation-container {
+            background-color: white;
+            padding: 40px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2ecc71;
+        }
+        .service-details {
+            margin: 20px 0;
+            font-size: 18px;
+        }
+        .service-details strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #3498db;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #2980b9;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="confirmation-container">
+        <h1>Thank You for Your Purchase!</h1>
+        <p>Your cleaning service has been successfully booked.</p>
+        
+        <div class="service-details">
+            <strong>Service:</strong>
+            <strong>Date:</strong>
+            <strong>Time:</strong>
+            <strong>Address:</strong>
+        </div>
+
+        <button onclick="window.location.href='../landingPage.html'">Back to Homepage</button>
+        <a class="back-link" href="..\src\customerServices.html">View More Services</a>
+    </div>
+
+          <!-- Footer Section -->
+          <footer class="py-2 md:py-4 text-center bg-[#2c4755]">
+            <p class="text-white">
+              © 2024
+              <span style="color: #10cab7">Clean Choice</span>
+              - All Rights Reserved
+            </p>
+          </footer>
+
+</body>
+</html>
