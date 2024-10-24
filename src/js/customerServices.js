@@ -2,7 +2,6 @@ import { servicesArray } from './services.js';
 
 let selectedServices = JSON.parse(localStorage.getItem("selectedServices")) || [];
 
-
 // Function to display the services array in the HTML
 export function displayServices() {
   const servicesContainer = document.getElementById("services-container");
@@ -18,6 +17,7 @@ export function displayServices() {
     `;
     servicesContainer.appendChild(serviceDiv);
   });
+
   // Add event listeners to all "+ Add" buttons
   const addButtons = servicesContainer.querySelectorAll("button");
   addButtons.forEach((button) => {
@@ -26,14 +26,35 @@ export function displayServices() {
       const selectedService = servicesArray[index];
       selectedServices.push(selectedService);
       localStorage.setItem("selectedServices", JSON.stringify(selectedServices)); // Store in local storage
-      console.log("Selected Services:", selectedServices); // For debugging
 
       // Change button text and color
       event.target.textContent = "Added";
+      event.target.classList.add("cursor-not-allowed");
+      event.target.classList.replace("bg-teal-600", "bg-gray-400");
       event.target.classList.remove("hover:bg-teal-700");
       event.target.disabled = true; // Disable the button to prevent multiple additions
     });
   });
 }
 
-document.addEventListener('DOMContentLoaded', displayServices);
+// Function to reset the buttons to their original state
+function resetButtons() {
+  const addButtons = document.querySelectorAll("button");
+  addButtons.forEach((button) => {
+    button.textContent = "+ Add";
+    button.classList.remove("cursor-not-allowed");
+    button.classList.replace("bg-gray-400", "bg-teal-600");
+    button.classList.add("hover:bg-teal-700");
+    button.disabled = false;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  displayServices();
+  resetButtons();
+});
+
+// Reset buttons when the user leaves the page
+window.addEventListener('beforeunload', function() {
+  resetButtons();
+});
