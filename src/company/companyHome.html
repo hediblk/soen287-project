@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/normlize.css" />
+    <link href="../styles/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Company Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        header {
+            width: 100%;
+            background-color: #ffffff;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 2px solid #10cab7;
+            padding-bottom: 5px;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 300px;
+        }
+        button {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #10cab7;
+            border-radius: 8px;
+            background-color: #ffffff;
+            color: #10cab7;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            width: 100%;
+            text-align: center;
+        }
+        button:hover {
+            background-color: #10cab7;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container mx-auto flex items-center space-x-4">
+            <img class="logo h-8 w-8 md:h-12 md:w-12" src="../assets/logo2.webp" alt="Service Pro Logo" />
+            <a href="companyHome.html">
+                <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">Service Pro</h1>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>User Dashboard</h1>
+        <div class="button-container">
+            <button onclick="location.href='companyEditInfo.html'">Edit Company Info</button>
+            <button onclick="location.href='companyEditServices.html'">Edit Company Services</button>
+            <button onclick="location.href='viewServicesSold.html'">View Unpaid Bills</button>
+            <button onclick="location.href='viewServicesSold.html'">View All Services Sold</button>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="py-2 md:py-4 text-center bg-[#2c4755]">
+        <p class="text-white">
+            © 2024
+            <span style="color: #10cab7">Service Pro</span>
+            - All Rights Reserved
+        </p>
+    </footer>
+</body>
+</html>
