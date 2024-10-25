@@ -13,34 +13,165 @@
     <!-- Header Section -->
     <header class="header bg-white py-2 md:py-4">
       <div class="container mx-auto flex items-center space-x-4">
-        <img class="logo h-8 w-8 md:h-12 md:w-12" src="../assets/logo2.webp" alt="Service Pro Logo" />
+        <img
+          class="logo h-8 w-8 md:h-12 md:w-12"
+          src="../assets/logo2.webp"
+          alt="Service Pro Logo"
+        />
         <a href="../landingPage.html">
-          <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">Service Pro</h1>
+          <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">
+            Service Pro
+          </h1>
         </a>
       </div>
     </header>
 
-    <div class="flex-grow flex items-center justify-center p-4 md:p-8">
-      <div class="login-container bg-white rounded-lg shadow-md p-8 w-full max-w-md">
-        <h2 class="text-2xl font-semibold mb-6 text-center">Login as a Company</h2>
-        <form action="/submit-login" method="POST">
+    <!-- Main Content -->
+    <div
+      id="login-form"
+      class="flex-grow flex items-center justify-center p-4 md:p-8"
+    >
+      <div
+        class="login-container bg-white rounded-lg shadow-md p-8 w-full max-w-md"
+      >
+        <h2 class="text-2xl font-semibold mb-6 text-center">
+          Login as a Company
+        </h2>
+        <form action="/submit-login" method="POST" id="login-form">
           <div class="input-field mb-4">
-            <label for="username" class="block text-gray-700 font-medium mb-1">User Name:</label>
-            <input type="text" id="username" name="username" required class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200" />
+            <label for="username" class="block text-gray-700 font-medium mb-1"
+              >User Name:</label
+            >
+            <input
+              type="text"
+              id="username"
+              name="username"
+              required
+              class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
+            />
+          </div>
+          <div class="input-field mb-6">
+            <label for="password" class="block text-gray-700 font-medium mb-1"
+              >Password:</label
+            >
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
+            />
+          </div>
+          <button
+            type="submit"
+            class="login-btn w-full bg-teal-600 text-white py-2 rounded-md hover:bg-teal-700 transition duration-200"
+          >
+            Login
+          </button>
+          <div class="mt-4 flex flex-col items-center">
+            <a
+              href="#"
+              class="forgot-password text-teal-600 hover:underline mt-2"
+              >Forgot Password?</a
+            >
+            <a
+              href="#"
+              onclick="showSignupForm()"
+              class="new-account text-teal-600 hover:underline mt-2"
+              >Don't have a company account?</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- SignUP FORM -->
+
+    <div
+      id="signup-form"
+      class="signup-container flex-grow flex items-center justify-center p-4 md:p-8"
+      style="display: none"
+    >
+      <div
+        class="signup-container bg-white rounded-lg shadow-md p-8 w-full max-w-md"
+      >
+        <h2 class="text-2xl font-semibold mb-6 text-center">
+          Create an Account for your Company:
+        </h2>
+        <form action="/submit-login" method="POST" id="create-account-form">
+          <div class="input-field mb-4">
+            <label
+              for="company-name"
+              class="block text-gray-700 font-medium mb-1"
+              >Company Name:</label
+            >
+            <input
+              type="text"
+              id="company-name"
+              name="company-name"
+              required
+              class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
+            />
+          </div>
+
+          <div class="input-field mb-4">
+            <label for="username" class="block text-gray-700 font-medium mb-1"
+              >User Name:</label
+            >
+            <input
+              type="text"
+              id="username2"
+              name="username"
+              required
+              class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
+            />
           </div>
 
           <div class="input-field mb-6">
-            <label for="password" class="block text-gray-700 font-medium mb-1">Password:</label>
-            <input type="password" id="password" name="password" required class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200" />
+            <label for="password" class="block text-gray-700 font-medium mb-1"
+              >Password:</label
+            >
+            <input
+              type="password"
+              id="password2"
+              name="password"
+              required
+              class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
+            />
           </div>
 
-          <button type="submit" onclick="window.location.href='companyHome.html'"class="login-btn w-full bg-teal-600 text-white py-2 rounded-md hover:bg-teal-700 transition duration-200">Login</button>
-
-          <div class="mt-4 flex flex-col items-center">
-            <a href="#" class="forgot-password text-teal-600 hover:underline mt-2">Forgot Password?</a>
-            <a href="./companySignup.html" class="new-account text-teal-600 hover:underline mt-2">Don't have a company account?</a>
+          <div class="input-field mb-6">
+            <label
+              for="confirm-password"
+              class="block text-gray-700 font-medium mb-1"
+              >Re-enter Password:</label
+            >
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              required
+              class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
+            />
           </div>
+
+          <button
+            type="submit"
+            onclick="showLoginForm()"
+            class="login-btn w-full bg-teal-600 text-white py-2 rounded-md hover:bg-teal-700 transition duration-200"
+          >
+            Create Account
+          </button>
         </form>
+
+        <div class="mt-4 flex flex-col items-center">
+          <a
+            href="#"
+            onclick="showLoginForm()"
+            class="new-account text-teal-600 hover:underline mt-2"
+            >You already have a company account? Login here!</a
+          >
+        </div>
       </div>
     </div>
 
@@ -52,5 +183,7 @@
         - All Rights Reserved
       </p>
     </footer>
+
+    <script src="../js/companyScript.js"></script>
   </body>
 </html>

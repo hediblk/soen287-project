@@ -1,3 +1,19 @@
+
+function showSignupForm() {
+  document.getElementById("login-form").style.display = "none";
+  document.getElementById("signup-form").style.display = "flex";
+}
+
+function showLoginForm() {
+  document.getElementById("signup-form").style.display = "none";
+  document.getElementById("login-form").style.display = "flex";
+}
+
+function login() {
+  window.location.href = 'customerHome.html';
+}
+
+
 // Class Client
 class Client {
   constructor(firstName, lastName, username, password) {
@@ -20,8 +36,8 @@ document
     event.preventDefault();
     const firstName = document.getElementById("first-name").value;
     const lastName = document.getElementById("last-name").value;
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    const username = document.getElementById("username2").value;
+    const password = document.getElementById("password2").value;
     const newClient = new Client(firstName, lastName, username, password);
     clients.push(newClient);
     console.log(
@@ -33,3 +49,35 @@ document
   });
 
   
+
+  document
+  .getElementById("login-form")
+  .addEventListener("submit", function (event) {
+      event.preventDefault();
+      const usernameInput = document.getElementById("username").value;
+      const passwordInput = document.getElementById("password").value;
+      var flag = false;
+      var flag2 = false;
+      clients.forEach(function(client){
+          if(client.username == usernameInput){
+              flag= true
+          }
+      })
+
+      if(flag){
+        clients.forEach(function(client){
+              if(client.password == passwordInput){
+                  flag2= true
+              }
+          })
+          if(flag2){
+              window.location.href = 'customerHome.html';
+          }else{
+              alert("password is Wrong!")
+          }
+      }else{
+          alert("User Name is Wrong!")
+      }
+     
+
+  })
