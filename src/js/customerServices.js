@@ -1,13 +1,12 @@
-import { servicesArray } from './services.js';
-
-let selectedServices = JSON.parse(localStorage.getItem("selectedServices")) || [];
+const storedServices = JSON.parse(localStorage.getItem("servicesArray")) || [{ name: "test", price: "100" }];
+const selectedServices = JSON.parse(localStorage.getItem("selectedServices")) || [];
 
 // Function to display the services array in the HTML
 export function displayServices() {
   const servicesContainer = document.getElementById("services-container");
   servicesContainer.innerHTML = ""; // Clear the current display
 
-  servicesArray.forEach((service, index) => {
+  storedServices.forEach((service, index) => {
     const serviceDiv = document.createElement("div");
     serviceDiv.className = "bg-white p-4 rounded shadow w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-0.75rem)]";
     serviceDiv.innerHTML = `
@@ -23,7 +22,7 @@ export function displayServices() {
   addButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
       const index = event.target.getAttribute("data-index");
-      const selectedService = servicesArray[index];
+      const selectedService = storedServices[index];
       selectedServices.push(selectedService);
       localStorage.setItem("selectedServices", JSON.stringify(selectedServices)); // Store in local storage
 
@@ -49,12 +48,12 @@ function resetButtons() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   displayServices();
   resetButtons();
 });
 
 // Reset buttons when the user leaves the page
-window.addEventListener('beforeunload', function() {
+window.addEventListener("beforeunload", function () {
   resetButtons();
 });
