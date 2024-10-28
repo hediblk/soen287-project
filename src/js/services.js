@@ -7,4 +7,6 @@ const storedServices = [
   { name: "King's Package", price: "250.00" },
 ];
 
-localStorage.setItem("servicesArray", JSON.stringify(storedServices));
+if (!localStorage.getItem("servicesArray")) {
+  localStorage.setItem("servicesArray", JSON.stringify(storedServices));
+}
