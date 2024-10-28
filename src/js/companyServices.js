@@ -1,11 +1,10 @@
-const servicesArray = [
-  { name: "Newcomer Package", price: "25.00" },
-  { name: "Standard Package", price: "40.00" },
-  { name: "Experienced Package", price: "75.00" },
-  { name: "Deluxe Package", price: "100.00" },
-  { name: "VIP Deluxe Package", price: "150.00" },
-  { name: "King's Package", price: "250.00" },
-];
+// Load the services array from localStorage if available; otherwise, initialize an empty array
+let servicesArray = JSON.parse(localStorage.getItem("servicesArray")) || [];
+
+// Function to save the current servicesArray to localStorage
+function saveServicesToLocalStorage() {
+  localStorage.setItem("servicesArray", JSON.stringify(servicesArray));
+}
 
 // Function to add a new service
 document.getElementById("add-service-form").addEventListener("submit", function (event) {
@@ -16,6 +15,7 @@ document.getElementById("add-service-form").addEventListener("submit", function 
   if (serviceName.trim() !== "" && servicePrice.trim() !== "") {
     addService(serviceName, servicePrice);
     servicesArray.push({ name: serviceName, price: parseFloat(servicePrice).toFixed(2) }); // Add to the global array
+    saveServicesToLocalStorage(); // Save updated array to localStorage
     printServices(); // Update the display
     document.getElementById("new-service-name").value = "";
     document.getElementById("new-service-price").value = "";
@@ -53,6 +53,7 @@ function editService(button) {
   }
 
   updateServicesArray(); // Update the global array after editing
+  saveServicesToLocalStorage(); // Save updated array to localStorage
   printServices(); // Update the display
 }
 
@@ -63,6 +64,7 @@ function deleteService(button) {
     li.remove();
 
     updateServicesArray(); // Update the global array after deletion
+    saveServicesToLocalStorage(); // Save updated array to localStorage
     printServices(); // Update the display
   }
 }
