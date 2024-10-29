@@ -35,9 +35,16 @@
         <!-- Selected services will be injected here -->
       </div>
 
-      <a href="./customerPurchaseConfirmed.html">
-        Pay
-      </a>
+
+
+      <!-- Pay button -->
+      <div class="flex justify-center gap-4 mt-4">
+        <a id="confirm-purchase-btn" class="text-white bg-teal-600 hover:bg-teal-700 px-4 py-2 rounded" href="./customerPurchaseConfirmed.html">
+          Pay
+        </a>
+      </div>
+
+
     </main>
 
     
@@ -51,5 +58,18 @@
     </footer>
 
     <script src="../js/customerCart.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const selectedServices = JSON.parse(localStorage.getItem('selectedServices')) || [];
+        const confirmPurchaseBtn = document.getElementById('confirm-purchase-btn');
+
+        if (selectedServices.length === 0) {
+          confirmPurchaseBtn.classList.add('cursor-not-allowed', 'bg-gray-400');
+          confirmPurchaseBtn.classList.remove('bg-teal-600', 'hover:bg-teal-700');
+          confirmPurchaseBtn.href = '#'; // Prevent navigation
+          confirmPurchaseBtn.textContent = 'Cart is Empty';
+        }
+      });
+    </script>
   </body>
 </html>

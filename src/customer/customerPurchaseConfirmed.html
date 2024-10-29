@@ -1,106 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/normlize.css" />
-    <link href="../styles/output.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <title>Purchase Confirmation</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../styles/normlize.css" />
+        <link href="../styles/output.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <title>Purchase Confirmation</title>
+    </head>
+
 
     <body class="flex flex-col min-h-screen bg-gray-100">
         <!-- Header Section -->
         <header class="header bg-white py-2 md:py-4">
             <div class="container mx-auto flex items-center space-x-4">
               <img class="logo h-8 w-8 md:h-12 md:w-12" src="../assets/logo2.webp" alt="Service Pro Logo" />
-              <a href="./landingPage.html">
+              <a href="../landingPage.html">
                 <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">Service Pro</h1>
               </a>
             </div>
-          </header>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 20px;
-            text-align: center;
-        }
-        .confirmation-container {
-            background-color: white;
-            padding: 40px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: 0 auto;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #2ecc71;
-        }
-        .service-details {
-            margin: 20px 0;
-            font-size: 18px;
-        }
-        .service-details strong {
-            display: block;
-            margin-bottom: 5px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #2980b9;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        button:hover {
-            background-color: #3498db;
-        }
-        a {
-            color: white;
-            text-decoration: none;
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 30px;
-            color: #2980b9;
-            text-decoration: none;
-            font-size: 16px;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="confirmation-container">
-        <h1>Thank You for Your Purchase!</h1>
-        <p>Your service(s) have been successfully booked.</p>
+        </header>
         
-        <div class="service-details">
-            <strong>Service:</strong>
-            <strong>Date:</strong>
-            <strong>Time:</strong>
-            <strong>Address:</strong>
-        </div>
+        <main class="container mx-auto py-6 flex-grow">
+            <div class="confirmation-container">
+                <h1>Thank You for Your Purchase!</h1>
+                <p>Your service(s) have been successfully booked.</p>
+                
+                <div id="service-details" class="service-details">
+                    <!-- Selected services will be injected here -->
+                </div>
+                
+            </div>
+        </main>
 
-        <button onclick="window.location.href='../landingPage.html'">Back to Homepage</button>
-        <a class="back-link" href="../customer/customerHome.html">View More Services</a>
-    </div>
-
-          <!-- Footer Section -->
-          <footer class="py-2 md:py-4 text-center bg-[#2c4755]">
+        <!-- Footer Section -->
+        <footer class="py-2 md:py-4 text-center bg-[#2c4755]">
             <p class="text-white">
-              © 2024
-              <span style="color: #10cab7">Service Pro</span>
-              - All Rights Reserved
+                © 2024
+                <span style="color: #10cab7">Service Pro</span>
+                - All Rights Reserved
             </p>
-          </footer>
-
-</body>
+        </footer>
+            
+        <script src="../js/customerPurchasedConfirmed.js"></script>
+            
 </html>
+        
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding: 20px;
+        text-align: center;
+    }
+    .confirmation-container {
+        background-color: white;
+        text-align: center;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: 0 auto;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        color: #2ecc71;
+    }
+    .service-details {
+        margin-top: 20px;
+        text-align: left;
+    }
+    .back-link {
+        display: inline-block;
+        margin-top: 30px;
+        color: #2980b9;
+        text-decoration: none;
+        font-size: 16px;
+    }
+    .back-link:hover {
+        text-decoration: underline;
+    }
+</style>
