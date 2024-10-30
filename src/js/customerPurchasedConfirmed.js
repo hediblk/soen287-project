@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const dateTimeDiv = document.createElement("div");
     dateTimeDiv.className = "date-time";
     dateTimeDiv.innerHTML = `
-      Date: ${date}<br>
-      Time: ${time}<br><br>
+      <strong>Date:</strong>${date}<br>
+      <strong>Time:</strong> ${time}<br><br>
     `;
     serviceDetailsDiv.appendChild(dateTimeDiv);
 
@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const serviceDiv = document.createElement("div");
       serviceDiv.className = "service-item";
       serviceDiv.innerHTML = `
-        Service: ${service.name}<br>
-        Price: $${service.price}<br><br>
+        <strong>Service: </strong>${service.name}<br>
+        <strong>Price:</strong> $${service.price}<br><br>
       `;
       serviceDetailsDiv.appendChild(serviceDiv);
     });
