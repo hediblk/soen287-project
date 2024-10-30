@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const dateTimeDiv = document.createElement("div");
     dateTimeDiv.className = "date-time";
     dateTimeDiv.innerHTML = `
+      <strong>Order number #1111</strong><br>
       <strong>Date:</strong>${date}<br>
       <strong>Time:</strong> ${time}<br><br>
     `;
