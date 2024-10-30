@@ -44,75 +44,32 @@
       </div>
     </header>
 
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        padding: 20px;
-      }
-      h1 {
-        color: #2c3e50;
-      }
-      #service-list {
-        list-style-type: none;
-        padding: 0;
-      }
-      #service-list li {
-        background-color: white;
-        padding: 10px;
-        margin-bottom: 10px;
-        display: flex;
-        justify-content: space-between; /* Aligns name and price on opposite sides */
-        align-items: center;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-      #service-list li span.service-price {
-        margin-left: auto; /* Ensures price is right-aligned */
-      }
-      button {
-        margin-left: 5px;
-        padding: 5px;
-        cursor: pointer;
-      }
-      #add-service-form {
-        margin-bottom: 20px;
-      }
-      input,
-      button {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-      input[type="number"] {
-        width: 80px;
-      }
-    </style>
-
-    <br />
-
-    <form id="add-service-form">
-      <input
+    
+    <div class="flex-grow my-6">
+    
+      <form id="add-service-form">
+        <input
         type="text"
         id="new-service-name"
         placeholder="Enter new cleaning service"
         required
-      />
-      <input
+        />
+        <input
         type="number"
         id="new-service-price"
         placeholder="Enter price"
         required
-      />
-      <button type="submit">Add Service</button>
-    </form>
-
-    <ul id="service-list">
-      <!-- Services will be loaded here -->
-    </ul>
-
+        />
+        <button type="submit">Add Service</button>
+      </form>
+      
+      <ul id="service-list">
+        <!-- Services will be loaded here -->
+      </ul>
+    </div>
+    
     <script src="../js/companyServices.js"></script>
-
+    
     <!-- Footer Section -->
     <footer class="py-2 md:py-4 text-center bg-[#2c4755]">
       <p class="text-white">
@@ -122,4 +79,49 @@
       </p>
     </footer>
   </body>
-</html>
+  </html>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    #service-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    #service-list li {
+      background-color: white;
+      padding: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between; /* Aligns name and price on opposite sides */
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    #service-list li span.service-price {
+      margin-left: auto; /* Ensures price is right-aligned */
+    }
+    button {
+      margin-left: 5px;
+      padding: 5px;
+      cursor: pointer;
+    }
+    #add-service-form {
+      margin-bottom: 20px;
+    }
+    input,
+    button {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    input[type="number"] {
+      width: 80px;
+    }
+  </style>
