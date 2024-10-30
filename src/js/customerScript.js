@@ -27,7 +27,7 @@ class Client {
 //Array to hold our CLients
 let clients = [];
 
-console.log(clients);
+clients[0] = new Client("client1", "Client1", "client1", "go");
 
 // Function to get the input of our clients and create an instant of the class CLient
 document

@@ -34,7 +34,7 @@ class Company {
 let companies = [];
 
 
-
+companies[0] = new Company("Company1", "company1", "go");
 
 
 
