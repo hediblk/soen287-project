@@ -13,76 +13,104 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-    <title>customer Home</title>
+    <title>Customer Home</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        color: #333333;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      header {
+        width: 100%;
+        background-color: #ffffff;
+        border-bottom: 1px solid #ccc;
+        padding: 10px 0;
+        text-align: center;
+      }
+      h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+        color: #2c3e50;
+        border-bottom: 2px solid #10cab7;
+        padding-bottom: 5px;
+      }
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        max-width: 300px;
+      }
+      button {
+        padding: 12px;
+        font-size: 16px;
+        border: 2px solid #10cab7;
+        border-radius: 8px;
+        background-color: #ffffff;
+        color: #10cab7;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+        width: 100%;
+        text-align: center;
+      }
+      button:hover {
+        background-color: #10cab7;
+        color: #ffffff;
+      }
+    </style>
   </head>
 
-  <body class="flex flex-col min-h-screen bg-gray-100">
+  <body>
     <!-- Header Section -->
-    <header class="header bg-white py-2 md:py-4">
-      <div
-        class="container mx-auto flex items-center justify-between space-x-4"
-      >
-        <div class="flex items-center space-x-4">
-          <img
-            class="logo h-8 w-8 md:h-12 md:w-12"
-            src="../assets/logo2.webp"
-            alt="Service Pro Logo"
-          />
-          <a href="./customerHome.html">
-            <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">
-              Company_Name
-            </h1>
-          </a>
-        </div>
-        <div class="flex items-center space-x-2">
-          <input
-            type="text"
-            placeholder="Search for a service"
-            class="border border-gray-300 rounded px-2 py-1 w-48 focus:outline-none focus:ring-2 focus:ring-teal-500"
-          />
-          <a
-            href="./customerCart.html"
-            class="text-white bg-teal-600 hover:bg-teal-700 px-4 py-2 rounded"
-          >
-            <i class="fas fa-shopping-cart"></i> Cart
-          </a>
-
-          <a
-            href="./customerAccount.html"
-            class="text-white bg-teal-600 hover:bg-teal-700 px-4 py-2 rounded"
-          >
-            <i class="fas fa-user"></i> My Account
-          </a>
-
-          <a
-            href="../company/companyEditServices.html"
-            class="text-white bg-red-600 hover:bg-red-700 px-4 py-2 rounded"
-          >
-            log out
-          </a>
-        </div>
+    <header>
+      <div class="container mx-auto flex items-center space-x-4">
+        <img
+          class="logo h-8 w-8 md:h-12 md:w-12"
+          src="../assets/logo2.webp"
+          alt="Service Pro Logo"
+        />
+        <a href="customerHome.html">
+          <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">
+            Company_Name
+          </h1>
+        </a>
       </div>
     </header>
 
     <!-- Main Content -->
-    <main class="container mx-auto py-6 flex-grow">
-      <div class="text-left text-lg font-semibold text-black my-4">
-        <p>
-          Hello, Customer! Please select the services you would like to add to
-          your cart.
-        </p>
+    <div class="container mx-auto flex items-center space-x-4">
+      <h1>Client Dashboard</h1>
+      <div class="button-container">
+        <button onclick="location.href='customerPurchaseServices.html'">
+          Purchase Services
+        </button>
+        <button onclick="location.href='customerEditInfo.html'">
+          Edit Client Information
+        </button>
+        <button onclick="location.href='customerPastOrders.html'">
+            Past Orders
+          </button>
+        <button
+          onclick="location.href='../landingPage.html'"
+          style="border: none"
+          class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition font-semibold"
+        >
+          Log Out
+        </button>
       </div>
-
-      <div
-        id="services-container"
-        class="flex flex-wrap gap-6 justify-center"
-      ></div>
-    </main>
-
-    <script type="module">
-      import { displayServices } from "../js/customerServices.js";
-      displayServices();
-    </script>
+    </div>
 
     <!-- Footer Section -->
     <footer class="py-2 md:py-4 text-center bg-[#2c4755]">

@@ -3,21 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styles/normlize.css" />
-    <link href="../styles/output.css" rel="stylesheet" />
-
-    <title>Edit Info</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="../styles/normlize.css" />
+  <link href="../styles/output.css" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+    <title>Edit Customer Info</title>
   </head>
-  <body>
+  <body class="flex flex-col min-h-screen bg-gray-100">
     <!-- Header Section -->
-    <header class="bg-white py-2 md:py-4">
+    <header class="header bg-white py-2 md:py-4">
       <div class="container mx-auto flex items-center space-x-4">
         <img
-          class="h-8 w-8 md:h-12 md:w-12"
+          class="logo h-8 w-8 md:h-12 md:w-12"
           src="../assets/logo2.webp"
           alt="Service Pro Logo"
         />
-        <a href="./customerHome.html">
+        <a href="customerHome.html">
           <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">
             Company_Name
           </h1>
@@ -25,8 +32,69 @@
       </div>
     </header>
 
+    <!-- Main Content -->
+    <main class="container mx-auto py-6 flex-grow">
+      <h1 class="text-2xl font-bold mb-6 text-center">
+        Edit Customer Information
+      </h1>
+
+      <form
+        id="company-info-form"
+        class="bg-white p-6 rounded shadow-md max-w-lg mx-auto"
+      >
+        <!-- Customer Name -->
+        <div class="mb-4">
+          <label for="company-name" class="block text-gray-700 font-bold mb-2"
+            >Customer Full Name:</label
+          >
+          <input
+            type="text"
+            id="company-name"
+            class="w-full px-3 py-2 border rounded"
+            placeholder="Enter first and last name"
+            required
+          />
+        </div>
+
+        <!-- Customer email Address -->
+        <div class="mb-4">
+          <label
+            for="company-address"
+            class="block text-gray-700 font-bold mb-2"
+            >Customer Email Address:</label
+          >
+          <textarea
+            id="company-address"
+            class="w-full px-3 py-2 border rounded"
+            rows="4"
+            placeholder="Enter email address"
+            required
+          ></textarea>
+        </div>
+
+        <button>
+          type="submit"
+          class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"
+          Save Information
+        </button>
+      </form>
+
+      <div
+        id="display-info"
+        class="bg-white p-6 rounded shadow-md max-w-lg mx-auto mt-6"
+      >
+        <h2 class="text-xl font-bold mb-4">Current Client Information</h2>
+        <p class="mb-2">
+          <strong>Name:</strong> <span id="display-company-name"></span>
+        </p>
+        <p class="mb-4">
+          <strong>Address:</strong> <span id="display-company-address"></span>
+        </p>
+      </div>
+    </main>
 
 
+    <script src="..\js\companyInformation.js"></script>
     
 
         <!-- Footer Section -->
