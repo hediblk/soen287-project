@@ -71,7 +71,7 @@ document
               }
           })
           if(flag2){
-              window.location.href = 'customerHome.html';
+              window.location.href = 'customerPurchaseServices.html';
           }else{
               alert("password is Wrong!")
           }
