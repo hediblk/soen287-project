@@ -1,110 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../styles/normlize.css" />
     <link href="../styles/output.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <title>View All Sales</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        h1 {
-            text-align: center;
-            font-size: 2em;
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex-grow: 1;
-            padding: 20px;
-        }
-        .receipt-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            max-width: 1200px;
-            width: 100%;
-        }
-        .receipt-box {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        .receipt-box h2 {
-            font-size: 1.2em;
-            color: #10cab7;
-            margin-bottom: 10px;
-        }
-        .receipt-detail {
-            margin-bottom: 8px;
-            color: #333;
-        }
-        .receipt-detail strong {
-            color: #555;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f4f8;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      h1 {
+        text-align: center;
+        font-size: 2em;
+        color: #2c3e50;
+        margin-bottom: 20px;
+      }
+      .main-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-grow: 1;
+        padding: 20px;
+      }
+      .receipt-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        max-width: 1200px;
+        width: 100%;
+      }
+      .receipt-box {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      .receipt-box h2 {
+        font-size: 1.2em;
+        color: #10cab7;
+        margin-bottom: 10px;
+      }
+      .receipt-detail {
+        margin-bottom: 8px;
+        color: #333;
+      }
+      .receipt-detail strong {
+        color: #555;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <!-- Header Section -->
     <header class="header bg-white py-2 md:py-4">
-        <div class="container mx-auto flex items-center space-x-4">
-            <img class="logo h-8 w-8 md:h-12 md:w-12" src="../assets/logo2.webp" alt="Service Pro Logo" />
-            <a href="companyHome.html">
-                <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">Company_Name</h1>
-            </a>
-        </div>
+      <div class="container mx-auto flex items-center space-x-4">
+        <img
+          class="logo h-8 w-8 md:h-12 md:w-12"
+          src="../assets/logo2.webp"
+          alt="Service Pro Logo"
+        />
+        <a href="companyAccount">
+          <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">
+            Company_Name
+          </h1>
+        </a>
+      </div>
     </header>
 
     <!-- Main Content -->
     <div class="main-content">
-        <h1>All Services Purchased</h1>
-        <div class="receipt-grid">
-            <!-- Receipt 1 -->
-            <div class="receipt-box">
-                <h2>Company Name: XYZ Corp</h2>
-                <p class="receipt-detail"><strong>Service(s) Purchased:</strong> Newcomer Package, Deluxe Package</p>
-                <p class="receipt-detail"><strong>Total Price:</strong> $125.00</p>
-                <p class="receipt-detail"><strong>Date:</strong> 2024-01-15</p>
-                <p class="receipt-detail"><strong>Time:</strong> 14:30</p>
-                <p class="receipt-detail"><strong>Status:</strong> Paid</p>
-            </div>
-
-            <!-- Receipt 2 -->
-            <div class="receipt-box">
-                <h2>Company Name: ABC Ltd</h2>
-                <p class="receipt-detail"><strong>Service(s) Purchased:</strong> King's Package</p>
-                <p class="receipt-detail"><strong>Total Price:</strong> $250.00</p>
-                <p class="receipt-detail"><strong>Date:</strong> 2024-01-14</p>
-                <p class="receipt-detail"><strong>Time:</strong> 09:00</p>
-                <p class="receipt-detail"><strong>Status:</strong> Unpaid</p>
-            </div>
-            <!-- Additional receipts can be added here following the same structure -->
+      <h1>All Services Purchased</h1>
+      <div class="receipt-grid">
+        <!-- Receipt 1 -->
+        <div class="receipt-box">
+          <h2>Company Name: XYZ Corp</h2>
+          <p class="receipt-detail">
+            <strong>Service(s) Purchased:</strong> Newcomer Package, Deluxe
+            Package
+          </p>
+          <p class="receipt-detail"><strong>Total Price:</strong> $125.00</p>
+          <p class="receipt-detail"><strong>Date:</strong> 2024-01-15</p>
+          <p class="receipt-detail"><strong>Time:</strong> 14:30</p>
+          <p class="receipt-detail"><strong>Status:</strong> Paid</p>
         </div>
+
+        <!-- Receipt 2 -->
+        <div class="receipt-box">
+          <h2>Company Name: ABC Ltd</h2>
+          <p class="receipt-detail">
+            <strong>Service(s) Purchased:</strong> King's Package
+          </p>
+          <p class="receipt-detail"><strong>Total Price:</strong> $250.00</p>
+          <p class="receipt-detail"><strong>Date:</strong> 2024-01-14</p>
+          <p class="receipt-detail"><strong>Time:</strong> 09:00</p>
+          <p class="receipt-detail"><strong>Status:</strong> Unpaid</p>
+        </div>
+        <!-- Additional receipts can be added here following the same structure -->
+      </div>
     </div>
 
     <!-- Footer Section -->
     <footer class="py-2 md:py-4 text-center bg-[#2c4755] mt-auto">
-        <p class="text-white">
-            © 2024
-            <span style="color: #10cab7">Service Pro</span>
-            - All Rights Reserved
-        </p>
+      <p class="text-white">
+        © 2024
+        <span style="color: #10cab7">Service Pro</span>
+        - All Rights Reserved
+      </p>
     </footer>
-</body>
+  </body>
 </html>

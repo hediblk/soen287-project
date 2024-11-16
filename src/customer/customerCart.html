@@ -3,26 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../styles/normlize.css" />
     <link href="../styles/output.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <title>customer Cart</title>
   </head>
 
   <body class="flex flex-col min-h-screen bg-gray-100">
     <!-- Header Section -->
     <header class="header bg-white py-2 md:py-4">
-      <div class="container mx-auto flex items-center justify-between space-x-4">
+      <div
+        class="container mx-auto flex items-center justify-between space-x-4"
+      >
         <div class="flex items-center space-x-4">
-          <img class="logo h-8 w-8 md:h-12 md:w-12" src="../assets/logo2.webp" alt="Service Pro Logo" />
-          <a href="./customerHome.html">
-            <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">Company_Name</h1>
+          <img
+            class="logo h-8 w-8 md:h-12 md:w-12"
+            src="../assets/logo2.webp"
+            alt="Service Pro Logo"
+          />
+          <a href="purchaseServices">
+            <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">
+              Company_Name
+            </h1>
           </a>
         </div>
         <div class="flex items-center space-x-2">
-          <input type="text" placeholder="Search for a service" class="border border-gray-300 rounded px-2 py-1 w-48 focus:outline-none focus:ring-2 focus:ring-teal-500"/>
-          <a href="./customerCart.html" class="text-white bg-teal-600 hover:bg-teal-700 px-4 py-2 rounded">
+          <input
+            type="text"
+            placeholder="Search for a service"
+            class="border border-gray-300 rounded px-2 py-1 w-48 focus:outline-none focus:ring-2 focus:ring-teal-500"
+          />
+          <a
+            href="./customerCart.html"
+            class="text-white bg-teal-600 hover:bg-teal-700 px-4 py-2 rounded"
+          >
             <i class="fas fa-shopping-cart"></i> Cart
           </a>
         </div>
@@ -35,19 +56,18 @@
         <!-- Selected services will be injected here -->
       </div>
 
-
-
       <!-- Pay button -->
       <div class="flex justify-center gap-4 mt-4">
-        <a id="confirm-purchase-btn" class="text-white bg-teal-600 hover:bg-teal-700 px-4 py-2 rounded" href="./customerPurchaseConfirmed.html">
+        <a
+          id="confirm-purchase-btn"
+          class="text-white bg-teal-600 hover:bg-teal-700 px-4 py-2 rounded"
+          href="purchaseConfirmed"
+        >
           Pay
         </a>
       </div>
-
-
     </main>
 
-    
     <!-- Footer Section -->
     <footer class="py-2 md:py-4 text-center bg-[#2c4755]">
       <p class="text-white">
@@ -59,15 +79,21 @@
 
     <script src="../js/customerCart.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const selectedServices = JSON.parse(localStorage.getItem('selectedServices')) || [];
-        const confirmPurchaseBtn = document.getElementById('confirm-purchase-btn');
+      document.addEventListener("DOMContentLoaded", function () {
+        const selectedServices =
+          JSON.parse(localStorage.getItem("selectedServices")) || [];
+        const confirmPurchaseBtn = document.getElementById(
+          "confirm-purchase-btn"
+        );
 
         if (selectedServices.length === 0) {
-          confirmPurchaseBtn.classList.add('cursor-not-allowed', 'bg-gray-400');
-          confirmPurchaseBtn.classList.remove('bg-teal-600', 'hover:bg-teal-700');
-          confirmPurchaseBtn.href = '#'; // Prevent navigation
-          confirmPurchaseBtn.textContent = 'Cart is Empty';
+          confirmPurchaseBtn.classList.add("cursor-not-allowed", "bg-gray-400");
+          confirmPurchaseBtn.classList.remove(
+            "bg-teal-600",
+            "hover:bg-teal-700"
+          );
+          confirmPurchaseBtn.href = "#"; // Prevent navigation
+          confirmPurchaseBtn.textContent = "Cart is Empty";
         }
       });
     </script>

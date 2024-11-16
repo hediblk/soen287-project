@@ -78,7 +78,7 @@ document
               }
           })
           if(flag2){
-              window.location.href = 'companyHome.html';
+              window.location.href = 'companyAccount';
           }else{
               alert("password is Wrong!")
           }
