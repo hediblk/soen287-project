@@ -10,9 +10,5 @@
   "license": "ISC",
   "devDependencies": {
     "tailwindcss": "^3.4.13"
-  },
-  "dependencies": {
-    "express": "^4.21.1",
-    "nodemon": "^3.1.7"
   }
 }
