@@ -39,17 +39,50 @@
       </h1>
 
       <form
+        action="/updateCustomerInfo"
+        method="POST"
         id="company-info-form"
         class="bg-white p-6 rounded shadow-md max-w-lg mx-auto"
       >
-        <!-- Customer Name -->
+        <!-- First Name -->
         <div class="mb-4">
-          <label for="company-name" class="block text-gray-700 font-bold mb-2"
-            >Customer Full Name:</label
+          <label for="firstName" class="block text-gray-700 font-bold mb-2"
+            >First Name:</label
           >
           <input
             type="text"
-            id="company-name"
+            id="first-name"
+            name="firstName"
+            class="w-full px-3 py-2 border rounded"
+            placeholder="Enter first and last name"
+            required
+          />
+        </div>
+
+        <!-- Last Name -->
+        <div class="mb-4">
+          <label for="lastName" class="block text-gray-700 font-bold mb-2"
+            >Last Name:</label
+          >
+          <input
+            type="text"
+            id="last-name"
+            name="lastName"
+            class="w-full px-3 py-2 border rounded"
+            placeholder="Enter first and last name"
+            required
+          />
+        </div>
+
+        <!-- Username -->
+        <div class="mb-4">
+          <label for="username" class="block text-gray-700 font-bold mb-2"
+            >Username:</label
+          >
+          <input
+            type="text"
+            id="username"
+            name="username"
             class="w-full px-3 py-2 border rounded"
             placeholder="Enter first and last name"
             required
@@ -58,18 +91,47 @@
 
         <!-- Customer email Address -->
         <div class="mb-4">
-          <label
-            for="company-address"
-            class="block text-gray-700 font-bold mb-2"
-            >Customer Email Address:</label
+          <label for="email" class="block text-gray-700 font-bold mb-2"
+            >Email Address:</label
           >
-          <textarea
-            id="company-address"
+          <input
+            type="text"
+            id="email"
+            name="email"
             class="w-full px-3 py-2 border rounded"
-            rows="4"
-            placeholder="Enter email address"
+            placeholder="Enter first and last name"
             required
-          ></textarea>
+          />
+        </div>
+
+        <!-- Customer Address -->
+        <div class="mb-4">
+          <label for="address" class="block text-gray-700 font-bold mb-2">
+            Address:</label
+          >
+          <input
+            type="text"
+            id="address"
+            name="address"
+            class="w-full px-3 py-2 border rounded"
+            placeholder="Enter first and last name"
+            required
+          />
+        </div>
+
+        <!-- Customer password -->
+        <div class="mb-4">
+          <label for="password" class="block text-gray-700 font-bold mb-2">
+            Password:</label
+          >
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="w-full px-3 py-2 border rounded"
+            placeholder="Enter first and last name"
+            required
+          />
         </div>
 
         <!-- Save Info Button -->
@@ -80,6 +142,12 @@
           Save Info
         </button>
       </form>
+      <button
+        onclick="deleteAccountFun()"
+        class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition font-semibold"
+      >
+        Delete my account
+      </button>
 
       <div
         id="display-info"

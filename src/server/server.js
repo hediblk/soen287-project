@@ -57,8 +57,6 @@ app.get('/purchaseConfirmed', (req, res) => { // test if server is running
 
 
 
-
-
 // Company's routes
 app.get('/admin', (req, res) => { 
     res.sendFile(path.join(__dirname, "../landingPage.html"));
@@ -84,9 +82,110 @@ app.get('/allServicesSold', (req, res) => {
 
 
 
+// Create a Customer Account
+app.post("/customerCreateAccount", (req,res)=>{
+    
+    let customer={
+        first_name:req.body.firstName,
+        last_name:req.body.lastName,
+        email:req.body.email,
+        address:req.body.address,
+        username:req.body.username,
+        password:req.body.password
+    }
+    let sql = "INSERT INTO Customers SET ?";
+    db.query(sql,customer, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.sendFile(path.join(__dirname, "../customer/customerLogin.html"));
+            // res.send(result);
+        }
+    });
+
+});
+
+// Customer Login checking
+var loggedUser_ID;
+app.post("/customerLoginForm", (req, res) => {
+    const { username, password } = req.body;
+
+    let sql = "SELECT * FROM Customers WHERE username = ? AND password = ?";
+    db.query(sql, [username, password], (err, result) => {
+        if (err) {
+            console.log(err);
+        } else if (result.length > 0) {
+             loggedUser_ID = result[0].customer_id;
+            res.sendFile(path.join(__dirname, "../customer/customerPurchaseServices.html"));
+        } else {
+            res.status(401).send("Invalid username or password!");
+        }
+    });
+});
+
+// Update customer info
+app.post("/updateCustomerInfo", (req,res)=>{
+    let updatedCustomer={
+        first_name:req.body.firstName,
+        last_name:req.body.lastName,
+        email:req.body.email,
+        address:req.body.address,
+        username:req.body.username,
+        password:req.body.password,
+        customer_id: loggedUser_ID
+    }
+    let sql = `UPDATE Customers SET ? WHERE customer_id = ${loggedUser_ID}`;
+    db.query(sql, updatedCustomer, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.sendFile(path.join(__dirname, "../customer/customerHome.html"));
+        } 
+    });
+
+})
+
+// Delete a customer Account
+app.get("/deleteCustomerAccount", (req,res)=>{
+   
+    let sql = `DELETE FROM Customers WHERE customer_id = ${loggedUser_ID}`;
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.sendFile(path.join(__dirname, "../customerLandingPage.html"));
+        } 
+    });
+
+})
 
 
 
+
+
+
+// Create a Company Account
+app.post("/customerCreateAccount", (req,res)=>{
+    
+    let customer={
+        first_name:req.body.firstName,
+        last_name:req.body.lastName,
+        email:req.body.email,
+        address:req.body.address,
+        username:req.body.username,
+        password:req.body.password
+    }
+    let sql = "INSERT INTO Customers SET ?";
+    db.query(sql,customer, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.sendFile(path.join(__dirname, "../customer/customerLogin.html"));
+            // res.send(result);
+        }
+    });
+
+});
 
 
 

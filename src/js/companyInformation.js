@@ -2,23 +2,10 @@ document.addEventListener('DOMContentLoaded', loadCompanyInfo);
 
 const form = document.getElementById('company-info-form');
 
-form.addEventListener('submit', function(event) {
-    event.preventDefault();
 
-    // Get input values
-    const companyName = document.getElementById('company-name').value;
-    const companyAddress = document.getElementById('company-address').value;
-    const companyLogo = document.getElementById('company-logo').files[0];
-
-    // Validate logo file type
-    if (companyLogo && companyLogo.type !== 'image/jpeg') {
-        alert('Please upload a JPEG logo file.');
-        return;
-    }
-
-    // Save company information
-    saveCompanyInfo(companyName, companyAddress, companyLogo);
-});
+function deleteAccountFun(){
+    window.location.href = 'deleteCustomerAccount';
+}
 
 // Save company information to localStorage
 function saveCompanyInfo(name, address, logo) {
