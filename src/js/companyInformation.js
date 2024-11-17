@@ -3,9 +3,11 @@ document.addEventListener('DOMContentLoaded', loadCompanyInfo);
 const form = document.getElementById('company-info-form');
 
 
-function deleteAccountFun(){
-    window.location.href = 'deleteCustomerAccount';
+
+function deleteAdminAccountFun(){
+    window.location.href = 'deleteAdminAccount';
 }
+
 
 // Save company information to localStorage
 function saveCompanyInfo(name, address, logo) {

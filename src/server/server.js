@@ -28,6 +28,21 @@ db.connect((err) => {
 });
 
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, "../assets"));
+    },
+    filename: function (req, file, cb) {
+        cb(null, "Logo-" + file.originalname);
+    },
+    });
+
+const upload = multer({ storage: storage });
+
+
+
+
+
 // Customer's routes
 app.get('/', (req, res) => { 
     res.sendFile(path.join(__dirname, "../customerLandingPage.html"));
@@ -118,7 +133,69 @@ app.post("/customerLoginForm", (req, res) => {
              loggedUser_ID = result[0];
             res.sendFile(path.join(__dirname, "../customer/customerPurchaseServices.html"));
         } else {
-            res.status(401).send("Invalid username or password!");
+            res.send(`
+                <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/normlize.css" />
+    <link href="./styles/output.css" rel="stylesheet" />
+    <title>Service Pro</title>
+  </head>
+
+  <body class="flex flex-col min-h-screen bg-gray-100">
+    <!-- Header Section -->
+    <header class="header bg-white py-2 md:py-4">
+      <div class="container mx-auto flex items-center space-x-4">
+        <img
+          class="logo h-8 w-8 md:h-12 md:w-12"
+          src="./assets/logo2.webp"
+          alt="Service Pro Logo"
+        />
+        <a href="./customerLandingPage.html">
+          <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">
+            Company_Name
+          </h1>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <div
+      class="container mx-auto flex-grow p-4 md:p-8 flex items-center justify-center"
+      id="content"
+    >
+      <div
+        class="flex flex-col space-y-1.5 justify-center items-center bg-white rounded-lg shadow-md p-4"
+      >
+        <h2 class="text-2xl text-center">
+          User Name or passwrod are incorrect!!!
+        </h2>
+        <div class="flex lg:flex-row flex-col lg:gap-6">
+          <button
+            class="block text-center bg-[#2c4755] text-white px-6 py-3 rounded-md hover:text-emerald-300 transition-colors duration-200 mt-4"
+          >
+            <a href="customerLogin" class="text-lg">Try again!</a>
+            
+          </button>
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="py-2 md:py-4 text-center bg-[#2c4755]">
+      <p class="text-white">
+        © 2024
+        <span style="color: #10cab7">Service Pro</span>
+        - All Rights Reserved
+      </p>
+    </footer>
+    <script src="./js/services.js"></script>
+  </body>
+</html>
+                `);
         }
     });
 });
@@ -145,12 +222,10 @@ app.post("/updateCustomerInfo", (req,res)=>{
 
 })
 
-
-
 // Delete a customer Account
 app.get("/deleteCustomerAccount", (req,res)=>{
    
-    let sql = `DELETE FROM Customers WHERE customer_id = ${loggedUser_ID}`;
+    let sql = `DELETE FROM Customers WHERE customer_id = ${loggedUser_ID.customer_id}`;
     db.query(sql, (err, result) => {
         if (err) {
             console.log(err);
@@ -160,6 +235,7 @@ app.get("/deleteCustomerAccount", (req,res)=>{
     });
 
 })
+
 
 
 
@@ -202,7 +278,66 @@ app.post("/adminLoginForm", (req, res) => {
             loggedAdmin_ID = result[0];
             res.sendFile(path.join(__dirname, "../company/companyHome.html"));
         } else {
-            res.status(401).send("Invalid username or password!");
+            res.send(` <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/normlize.css" />
+    <link href="./styles/output.css" rel="stylesheet" />
+    <title>Service Pro</title>
+  </head>
+
+  <body class="flex flex-col min-h-screen bg-gray-100">
+    <!-- Header Section -->
+    <header class="header bg-white py-2 md:py-4">
+      <div class="container mx-auto flex items-center space-x-4">
+        <img
+          class="logo h-8 w-8 md:h-12 md:w-12"
+          src="./assets/logo2.webp"
+          alt="Service Pro Logo"
+        />
+        <a href="./customerLandingPage.html">
+          <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">
+            Company_Name
+          </h1>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <div
+      class="container mx-auto flex-grow p-4 md:p-8 flex items-center justify-center"
+      id="content"
+    >
+      <div
+        class="flex flex-col space-y-1.5 justify-center items-center bg-white rounded-lg shadow-md p-4"
+      >
+        <h2 class="text-2xl text-center">
+          User Name or passwrod are incorrect!!!
+        </h2>
+        <div class="flex lg:flex-row flex-col lg:gap-6">
+          <button
+            class="block text-center bg-[#2c4755] text-white px-6 py-3 rounded-md hover:text-emerald-300 transition-colors duration-200 mt-4"
+          >
+            <a href="companyLogin" class="text-lg">Try again!</a>
+          </button>
+          
+        </div>
+      </div>
+    </div>
+    <!-- Footer Section -->
+    <footer class="py-2 md:py-4 text-center bg-[#2c4755]">
+      <p class="text-white">
+        © 2024
+        <span style="color: #10cab7">Service Pro</span>
+        - All Rights Reserved
+      </p>
+    </footer>
+    <script src="./js/services.js"></script>
+  </body>
+</html>
+                `);
         }
     });
 });
@@ -228,6 +363,43 @@ app.post("/updateAdminInfo", (req,res)=>{
     });
 
 })
+
+// Delete a customer Account
+app.get("/deleteAdminAccount", (req,res)=>{
+   
+    let sql = `DELETE FROM Admins WHERE admin_id = ${loggedAdmin_ID.admin_id}`;
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.sendFile(path.join(__dirname, "../landingPage.html"));
+        } 
+    });
+
+})
+
+
+
+
+// Update company info
+app.post("/updateCompanyInfo",upload.single('companyLogo'), (req,res)=>{
+    let updatedCompany={
+        company_address:req.body.companyAddress,
+        company_name:req.body.companyName,
+        
+    }
+    let sql = `UPDATE company_info SET ? `;
+    db.query(sql, updatedCompany, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.sendFile(path.join(__dirname, "../company/companyHome.html"));
+        } 
+    });
+
+})
+
+
 
 
 
