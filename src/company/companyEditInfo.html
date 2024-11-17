@@ -41,6 +41,8 @@
 
       <form
         id="company-info-form"
+        action="updateCompanyInfo"
+        method="post"
         class="bg-white p-6 rounded shadow-md max-w-lg mx-auto"
       >
         <!-- Company Name -->
@@ -51,12 +53,12 @@
           <input
             type="text"
             id="company-name"
+            name="companyName"
             class="w-full px-3 py-2 border rounded"
             placeholder="Enter company name"
             required
           />
         </div>
-
         <!-- Company Logo -->
         <div class="mb-4">
           <label for="company-logo" class="block text-gray-700 font-bold mb-2"
@@ -65,12 +67,12 @@
           <input
             type="file"
             id="company-logo"
+            name="companyLogo"
             class="w-full px-3 py-2 border rounded"
             accept="image/jpeg"
             required
           />
         </div>
-
         <!-- Company Address -->
         <div class="mb-4">
           <label
@@ -78,15 +80,115 @@
             class="block text-gray-700 font-bold mb-2"
             >Company Address:</label
           >
-          <textarea
+          <input
+            type="text"
             id="company-address"
+            name="companyAddress"
             class="w-full px-3 py-2 border rounded"
-            rows="4"
             placeholder="Enter company address"
             required
-          ></textarea>
+          />
         </div>
+        <!-- Save Info Button -->
+        <button
+          type="submit"
+          class="bg-blue-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded w-32 mx-auto"
+        >
+          Save Info
+        </button>
+      </form>
 
+      <br />
+
+      <!-- Update admin info -->
+      <h1 class="text-2xl font-bold mb-6 text-center">
+        Edit Admin Information
+      </h1>
+
+      <form
+        id="admin-info-form"
+        action="updateAdminInfo"
+        method="post"
+        class="bg-white p-6 rounded shadow-md max-w-lg mx-auto"
+      >
+        <!-- Admin firstName -->
+        <div class="mb-4">
+          <label for="first-name" class="block text-gray-700 font-bold mb-2"
+            >First Name:</label
+          >
+          <input
+            type="text"
+            id="first-name"
+            name="firstName"
+            class="w-full px-3 py-2 border rounded"
+            placeholder="Enter company name"
+          />
+        </div>
+        <!-- Admin lastName -->
+        <div class="mb-4">
+          <label for="lastName" class="block text-gray-700 font-bold mb-2"
+            >Last Name:</label
+          >
+          <input
+            type="text"
+            id="last-name"
+            name="lastName"
+            class="w-full px-3 py-2 border rounded"
+            placeholder="Enter company name"
+          />
+        </div>
+        <!-- Admin email -->
+        <div class="mb-4">
+          <label for="email" class="block text-gray-700 font-bold mb-2"
+            >Email:</label
+          >
+          <input
+            type="text"
+            id="email"
+            name="email"
+            class="w-full px-3 py-2 border rounded"
+            placeholder="Enter company name"
+          />
+        </div>
+        <!-- Admin Address -->
+        <div class="mb-4">
+          <label for="admin-address" class="block text-gray-700 font-bold mb-2"
+            >Address:</label
+          >
+          <input
+            type="text"
+            id="admin-address"
+            name="address"
+            class="w-full px-3 py-2 border rounded"
+            placeholder="Enter company address"
+          />
+        </div>
+        <!-- Admin username -->
+        <div class="mb-4">
+          <label for="username" class="block text-gray-700 font-bold mb-2"
+            >Username:</label
+          >
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="w-full px-3 py-2 border rounded"
+            placeholder="Enter company name"
+          />
+        </div>
+        <!-- Admin password -->
+        <div class="mb-4">
+          <label for="password" class="block text-gray-700 font-bold mb-2"
+            >Password:</label
+          >
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="w-full px-3 py-2 border rounded"
+            placeholder="Enter company name"
+          />
+        </div>
         <!-- Save Info Button -->
         <button
           type="submit"

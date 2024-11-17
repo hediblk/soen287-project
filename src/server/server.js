@@ -115,7 +115,7 @@ app.post("/customerLoginForm", (req, res) => {
         if (err) {
             console.log(err);
         } else if (result.length > 0) {
-             loggedUser_ID = result[0].customer_id;
+             loggedUser_ID = result[0];
             res.sendFile(path.join(__dirname, "../customer/customerPurchaseServices.html"));
         } else {
             res.status(401).send("Invalid username or password!");
@@ -126,15 +126,15 @@ app.post("/customerLoginForm", (req, res) => {
 // Update customer info
 app.post("/updateCustomerInfo", (req,res)=>{
     let updatedCustomer={
-        first_name:req.body.firstName,
-        last_name:req.body.lastName,
-        email:req.body.email,
-        address:req.body.address,
-        username:req.body.username,
-        password:req.body.password,
-        customer_id: loggedUser_ID
+        first_name:(req.body.firstName.length === 0)? loggedUser_ID.first_name:req.body.firstName,
+        last_name:(req.body.lastName.length === 0)? loggedUser_ID.last_name:req.body.lastName,
+        email:(req.body.email.length === 0)? loggedUser_ID.email:req.body.email,
+        address:(req.body.address.length === 0)? loggedUser_ID.address:req.body.address,
+        username:(req.body.username.length === 0)? loggedUser_ID.username:req.body.username,
+        password:(req.body.password.length === 0)? loggedUser_ID.password:req.body.password,
+        customer_id: loggedUser_ID.customer_id
     }
-    let sql = `UPDATE Customers SET ? WHERE customer_id = ${loggedUser_ID}`;
+    let sql = `UPDATE Customers SET ? WHERE customer_id = ${loggedUser_ID.customer_id}`;
     db.query(sql, updatedCustomer, (err, result) => {
         if (err) {
             console.log(err);
@@ -144,6 +144,8 @@ app.post("/updateCustomerInfo", (req,res)=>{
     });
 
 })
+
+
 
 // Delete a customer Account
 app.get("/deleteCustomerAccount", (req,res)=>{
@@ -164,10 +166,10 @@ app.get("/deleteCustomerAccount", (req,res)=>{
 
 
 
-// Create a Company Account
-app.post("/customerCreateAccount", (req,res)=>{
+// Create an Admin Account
+app.post("/adminCreateAccount", (req,res)=>{
     
-    let customer={
+    let admin={
         first_name:req.body.firstName,
         last_name:req.body.lastName,
         email:req.body.email,
@@ -175,17 +177,57 @@ app.post("/customerCreateAccount", (req,res)=>{
         username:req.body.username,
         password:req.body.password
     }
-    let sql = "INSERT INTO Customers SET ?";
-    db.query(sql,customer, (err, result) => {
+    let sql = "INSERT INTO Admins SET ?";
+    db.query(sql,admin, (err, result) => {
         if (err) {
             console.log(err);
         } else {
-            res.sendFile(path.join(__dirname, "../customer/customerLogin.html"));
-            // res.send(result);
+            res.sendFile(path.join(__dirname, "../company/companyLogin.html"));
+           
         }
     });
 
 });
+
+// Admin Login checking
+var loggedAdmin_ID;
+app.post("/adminLoginForm", (req, res) => {
+    const { username, password } = req.body;
+
+    let sql = "SELECT * FROM Admins WHERE username = ? AND password = ?";
+    db.query(sql, [username, password], (err, result) => {
+        if (err) {
+            console.log(err);
+        } else if (result.length > 0) {
+            loggedAdmin_ID = result[0];
+            res.sendFile(path.join(__dirname, "../company/companyHome.html"));
+        } else {
+            res.status(401).send("Invalid username or password!");
+        }
+    });
+});
+
+// Update admin info
+app.post("/updateAdminInfo", (req,res)=>{
+    let updatedAdmin={
+        first_name:(req.body.firstName.length === 0)? loggedAdmin_ID.first_name:req.body.firstName,
+        last_name:(req.body.lastName.length === 0)? loggedAdmin_ID.last_name:req.body.lastName,
+        email:(req.body.email.length === 0)? loggedAdmin_ID.email:req.body.email,
+        address:(req.body.address.length === 0)? loggedAdmin_ID.address:req.body.address,
+        username:(req.body.username.length === 0)? loggedAdmin_ID.username:req.body.username,
+        password:(req.body.password.length === 0)? loggedAdmin_ID.password:req.body.password,
+        admin_id: loggedAdmin_ID.admin_id
+    }
+    let sql = `UPDATE Admins SET ? WHERE admin_id = ${loggedAdmin_ID.admin_id}`;
+    db.query(sql, updatedAdmin, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.sendFile(path.join(__dirname, "../company/companyHome.html"));
+        } 
+    });
+
+})
 
 
 
