@@ -211,12 +211,13 @@ app.post("/updateCustomerInfo", (req,res)=>{
         password:(req.body.password.length === 0)? loggedUser_ID.password:req.body.password,
         customer_id: loggedUser_ID.customer_id
     }
+    loggedUser_ID=updatedCustomer;
     let sql = `UPDATE Customers SET ? WHERE customer_id = ${loggedUser_ID.customer_id}`;
     db.query(sql, updatedCustomer, (err, result) => {
         if (err) {
             console.log(err);
         } else {
-            res.sendFile(path.join(__dirname, "../customer/customerHome.html"));
+            res.sendFile(path.join(__dirname, "../customer/customerEditInfo.html"))
         } 
     });
 
@@ -276,6 +277,7 @@ app.post("/adminLoginForm", (req, res) => {
             console.log(err);
         } else if (result.length > 0) {
             loggedAdmin_ID = result[0];
+            
             res.sendFile(path.join(__dirname, "../company/companyHome.html"));
         } else {
             res.send(` <!DOCTYPE html>
@@ -353,6 +355,7 @@ app.post("/updateAdminInfo", (req,res)=>{
         password:(req.body.password.length === 0)? loggedAdmin_ID.password:req.body.password,
         admin_id: loggedAdmin_ID.admin_id
     }
+    loggedAdmin_ID=updatedAdmin;
     let sql = `UPDATE Admins SET ? WHERE admin_id = ${loggedAdmin_ID.admin_id}`;
     db.query(sql, updatedAdmin, (err, result) => {
         if (err) {
@@ -430,7 +433,35 @@ app.get('/getcustomer/:id', (req, res) => { // get a specific customer by id
     });
 });
 
+app.get('/getLoggedUser', (req, res) => { // get a logged customer
+    const sql = `SELECT * FROM Customers WHERE customer_id = ${loggedUser_ID.customer_id}`;
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            if (result.length > 0) {
+                res.send(result[0]);
+            } else {
+                res.send('No customer found');
+            }
+        }
+    });
+});
 
+app.get('/getLoggedAdmin', (req, res) => { // get a logged admin 
+    const sql = `SELECT * FROM Admins WHERE admin_id = ${loggedAdmin_ID.admin_id}`;
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            if (result.length > 0) {
+                res.send(result[0]);
+            } else {
+                res.send('No customer found');
+            }
+        }
+    });
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
