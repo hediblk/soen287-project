@@ -78,13 +78,15 @@
       <div class="container mx-auto flex items-center space-x-4">
         <img
           class="logo h-8 w-8 md:h-12 md:w-12"
-          src="../assets/logo2.webp"
+          src="../assets/logo.jpg"
           alt="Service Pro Logo"
         />
         <a href="companyAccount">
-          <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">
-            Company_Name
-          </h1>
+          <h1
+            id="company-name-place"
+            class="text-lg md:text-2xl font-bold"
+            style="color: #10cab7"
+          ></h1>
         </a>
       </div>
     </header>
@@ -121,5 +123,31 @@
         - All Rights Reserved
       </p>
     </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const companyNamePlace = document.getElementById("company-name-place");
+        const logoPlace = document.getElementById("logo-place");
+        let company;
+
+        (async () => {
+          try {
+            const response = await fetch("/getCompany");
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            company = await response.json();
+            localStorage.setItem("companyInfo", JSON.stringify(company));
+            // Update the DOM with fetched data
+            if (company) {
+              companyNamePlace.innerHTML = company.company_name;
+            } else {
+              console.error("Company data is undefined");
+            }
+          } catch (error) {
+            console.error("Error fetching company:", error);
+          }
+        })();
+      });
+    </script>
   </body>
 </html>

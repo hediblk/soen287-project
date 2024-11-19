@@ -33,7 +33,7 @@ const storage = multer.diskStorage({
         cb(null, path.join(__dirname, "../assets"));
     },
     filename: function (req, file, cb) {
-        cb(null, "Logo-" + file.originalname);
+        cb(null, "Logo.jpg" );
     },
     });
 
@@ -361,7 +361,7 @@ app.post("/updateAdminInfo", (req,res)=>{
         if (err) {
             console.log(err);
         } else {
-            res.sendFile(path.join(__dirname, "../company/companyHome.html"));
+            res.sendFile(path.join(__dirname, "../company/companyEditInfo.html"));
         } 
     });
 
@@ -383,24 +383,42 @@ app.get("/deleteAdminAccount", (req,res)=>{
 
 
 
-
+var companyInfo = {
+    company_address: "Montreal",
+    company_name:"Pro Services",
+};
 // Update company info
 app.post("/updateCompanyInfo",upload.single('companyLogo'), (req,res)=>{
     let updatedCompany={
-        company_address:req.body.companyAddress,
-        company_name:req.body.companyName,
+        company_address:(req.body.companyAddress.length === 0)? companyInfo.company_address:req.body.companyAddress,
+        company_name:(req.body.companyName.length === 0)? companyInfo.company_name:req.body.companyName,
         
     }
+    companyInfo = updatedCompany;
     let sql = `UPDATE company_info SET ? `;
     db.query(sql, updatedCompany, (err, result) => {
         if (err) {
             console.log(err);
         } else {
-            res.sendFile(path.join(__dirname, "../company/companyHome.html"));
+            res.sendFile(path.join(__dirname, "../company/companyEditInfo.html"));
         } 
     });
 
 })
+app.get('/getCompany', (req, res) => { // get company info
+    const sql = `SELECT * FROM company_info`;
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            if (result.length > 0) {
+                res.send(result[0]);
+            } else {
+                res.send('No customer found');
+            }
+        }
+    });
+});
 
 
 

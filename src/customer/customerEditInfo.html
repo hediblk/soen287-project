@@ -21,147 +21,153 @@
       <div class="container mx-auto flex items-center space-x-4">
         <img
           class="logo h-8 w-8 md:h-12 md:w-12"
-          src="../assets/logo2.webp"
+          src="../assets/logo.jpg"
           alt="Service Pro Logo"
         />
         <a href="myAccount">
-          <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">
-            Company_Name
-          </h1>
+          <h1
+            id="company-name-place"
+            class="text-lg md:text-2xl font-bold"
+            style="color: #10cab7"
+          ></h1>
         </a>
       </div>
     </header>
-
-    <!-- Main Content -->
     <main class="container mx-auto py-6 flex-grow">
       <h1 class="text-2xl font-bold mb-6 text-center">
         Edit Customer Information
       </h1>
 
-      <div class="bg-white p-6 rounded shadow-md max-w-lg mx-auto">
-        <form action="/updateCustomerInfo" method="POST" id="company-info-form">
-          <!-- First Name -->
-          <div class="mb-4">
-            <label for="firstName" class="block text-gray-700 font-bold mb-2"
-              >First Name:</label
-            >
-            <input
-              type="text"
-              id="first-name"
-              name="firstName"
-              class="w-full px-3 py-2 border rounded"
-              placeholder="Enter first and last name"
-            />
-          </div>
-
-          <!-- Last Name -->
-          <div class="mb-4">
-            <label for="lastName" class="block text-gray-700 font-bold mb-2"
-              >Last Name:</label
-            >
-            <input
-              type="text"
-              id="last-name"
-              name="lastName"
-              class="w-full px-3 py-2 border rounded"
-              placeholder="Enter first and last name"
-            />
-          </div>
-
-          <!-- Username -->
-          <div class="mb-4">
-            <label for="username" class="block text-gray-700 font-bold mb-2"
-              >Username:</label
-            >
-            <input
-              type="text"
-              id="username"
-              name="username"
-              class="w-full px-3 py-2 border rounded"
-              placeholder="Enter first and last name"
-            />
-          </div>
-
-          <!-- Customer email Address -->
-          <div class="mb-4">
-            <label for="email" class="block text-gray-700 font-bold mb-2"
-              >Email Address:</label
-            >
-            <input
-              type="text"
-              id="email"
-              name="email"
-              class="w-full px-3 py-2 border rounded"
-              placeholder="Enter first and last name"
-            />
-          </div>
-
-          <!-- Customer Address -->
-          <div class="mb-4">
-            <label for="address" class="block text-gray-700 font-bold mb-2">
-              Address:</label
-            >
-            <input
-              type="text"
-              id="address"
-              name="address"
-              class="w-full px-3 py-2 border rounded"
-              placeholder="Enter first and last name"
-            />
-          </div>
-
-          <!-- Customer password -->
-          <div class="mb-4">
-            <label for="password" class="block text-gray-700 font-bold mb-2">
-              Password:</label
-            >
-            <input
-              type="password"
-              id="password"
-              name="password"
-              class="w-full px-3 py-2 border rounded"
-              placeholder="Enter first and last name"
-            />
-          </div>
-
-          <!-- Save Info Button -->
-          <button
-            type="submit"
-            class="bg-blue-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded w-32 mx-auto"
+      <!-- Flex Container for Side-by-Side Layout -->
+      <div class="flex gap-6">
+        <!-- Edit Info Form -->
+        <div class="bg-white p-6 rounded shadow-md w-1/2">
+          <form
+            action="/updateCustomerInfo"
+            method="POST"
+            id="company-info-form"
           >
-            Save Info
-          </button>
-        </form>
-        <br />
-        <button
-          type="none"
-          onclick="deleteCustomerAccountFun()"
-          class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition font-semibold"
-        >
-          Delete my account
-        </button>
-      </div>
+            <!-- First Name -->
+            <div class="mb-4">
+              <label for="firstName" class="block text-gray-700 font-bold mb-2"
+                >First Name:</label
+              >
+              <input
+                type="text"
+                id="first-name"
+                name="firstName"
+                class="w-full px-3 py-2 border rounded"
+                placeholder="Enter first and last name"
+              />
+            </div>
 
-      <div
-        id="display-info"
-        class="bg-white p-6 rounded shadow-md max-w-lg mx-auto mt-6"
-      >
-        <h2 class="text-xl font-bold mb-4">Current Client Information</h2>
-        <p class="mb-2">
-          <strong>First Name:</strong> <span id="display-first-name"></span>
-        </p>
-        <p class="mb-2"></p>
-          <strong>Last Name:</strong> <span id="display-last-name"></span>
-        </p>
-        <p class="mb-2"></p>
-          <strong>Userame:</strong> <span id="display-username"></span>
-        </p>
-        <p class="mb-2"></p>
-          <strong>Email Address:</strong> <span id="display-email"></span>
-        </p>
-        <p class="mb-4">
-          <strong >Address:</strong> <span id="display-address"></span>
-        </p>
+            <!-- Last Name -->
+            <div class="mb-4">
+              <label for="lastName" class="block text-gray-700 font-bold mb-2"
+                >Last Name:</label
+              >
+              <input
+                type="text"
+                id="last-name"
+                name="lastName"
+                class="w-full px-3 py-2 border rounded"
+                placeholder="Enter first and last name"
+              />
+            </div>
+
+            <!-- Username -->
+            <div class="mb-4">
+              <label for="username" class="block text-gray-700 font-bold mb-2"
+                >Username:</label
+              >
+              <input
+                type="text"
+                id="username"
+                name="username"
+                class="w-full px-3 py-2 border rounded"
+                placeholder="Enter first and last name"
+              />
+            </div>
+
+            <!-- Customer email Address -->
+            <div class="mb-4">
+              <label for="email" class="block text-gray-700 font-bold mb-2"
+                >Email Address:</label
+              >
+              <input
+                type="text"
+                id="email"
+                name="email"
+                class="w-full px-3 py-2 border rounded"
+                placeholder="Enter first and last name"
+              />
+            </div>
+
+            <!-- Customer Address -->
+            <div class="mb-4">
+              <label for="address" class="block text-gray-700 font-bold mb-2">
+                Address:</label
+              >
+              <input
+                type="text"
+                id="address"
+                name="address"
+                class="w-full px-3 py-2 border rounded"
+                placeholder="Enter first and last name"
+              />
+            </div>
+
+            <!-- Customer password -->
+            <div class="mb-4">
+              <label for="password" class="block text-gray-700 font-bold mb-2">
+                Password:</label
+              >
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="w-full px-3 py-2 border rounded"
+                placeholder="Enter first and last name"
+              />
+            </div>
+
+            <!-- Save Info Button -->
+            <button
+              type="submit"
+              class="bg-blue-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded w-32 mx-auto"
+            >
+              Save Info
+            </button>
+          </form>
+          <br />
+          <button
+            type="button"
+            onclick="deleteCustomerAccountFun()"
+            class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition font-semibold"
+          >
+            Delete my account
+          </button>
+        </div>
+
+        <!-- Current Customer Information -->
+        <div class="bg-white p-6 rounded shadow-md w-1/2 h-1/2">
+          <h2 class="text-xl font-bold mb-4">Current Client Information</h2>
+          <p class="mb-2">
+            <strong>First Name:</strong> <span id="display-first-name"></span>
+          </p>
+          <p class="mb-2">
+            <strong>Last Name:</strong> <span id="display-last-name"></span>
+          </p>
+          <p class="mb-2">
+            <strong>Username:</strong> <span id="display-username"></span>
+          </p>
+          <p class="mb-2">
+            <strong>Email Address:</strong> <span id="display-email"></span>
+          </p>
+          <p class="mb-4">
+            <strong>Address:</strong> <span id="display-address"></span>
+          </p>
+        </div>
       </div>
     </main>
 

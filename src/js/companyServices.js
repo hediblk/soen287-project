@@ -1,3 +1,13 @@
+// Display the new company name
+const company = JSON.parse(localStorage.getItem("companyInfo"));
+const companyNamePlace = document.getElementById("company-name-place");
+companyNamePlace.innerHTML = company.company_name;
+
+
+
+
+
+
 // Load the services array from localStorage if available; otherwise, initialize an empty array
 let servicesArray = JSON.parse(localStorage.getItem("servicesArray")) || [];
 
