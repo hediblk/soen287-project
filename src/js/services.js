@@ -1,7 +1,27 @@
-      // Display the new company name
-      const company = JSON.parse(localStorage.getItem("companyInfo"));
-      const companyNamePlace = document.getElementById("company-name-place");
-      companyNamePlace.innerHTML = company.company_name;
+document.addEventListener("DOMContentLoaded", () => {
+  const companyNamePlace = document.getElementById("company-name-place");
+  const logoPlace = document.getElementById("logo-place");
+  let company;
+
+  (async () => {
+    try {
+      const response = await fetch("/getCompany");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      company = await response.json();
+      localStorage.setItem("companyInfo", JSON.stringify(company));
+      // Update the DOM with fetched data
+      if (company) {
+        companyNamePlace.innerHTML = company.company_name;
+      } else {
+        console.error("Company data is undefined");
+      }
+    } catch (error) {
+      console.error("Error fetching company:", error);
+    }
+  })();
+});
 
 const storedServices = [
   { name: "Newcomer Package", price: "25.00" },
