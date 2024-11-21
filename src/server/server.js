@@ -1,13 +1,23 @@
 const express = require('express');
 const mysql = require('mysql');
 const multer = require('multer'); // used for the company logo upload, not implemented yet
+const session = require('express-session');
+const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "../")));
 app.use(express.static(path.join(__dirname, '../public')));//Added the styles files in public so we can display Tailwind
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: 'secret-key', // Replace with a strong secret key
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }, // Set to true if using HTTPS
+  })
+);
 
 const PORT = 3000;
 
@@ -40,6 +50,25 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
+function isUserLoggedIn(req, res, next) {
+    if (req.session.user) {
+      next(); // User is logged in, proceed to the next middleware/route
+    } else {
+        req.session.returnTo = req.originalUrl;
+      res.redirect('/customerLogin'); // Redirect to the login page if not logged in
+    }
+  }
+
+  function isAdminLoggedIn(req, res, next) {
+    if (req.session.admin) {
+      next(); // Admin is logged in, proceed to the next middleware/route
+    } else {
+        req.session.returnTo = req.originalUrl;
+      res.redirect('/companyLogin'); // Redirect to the login page if not logged in
+    }
+  }
+
+
 
 
 
@@ -50,22 +79,22 @@ app.get('/', (req, res) => {
 app.get('/customerLogin', (req, res) => { // test if server is running
     res.sendFile(path.join(__dirname, "../customer/customerLogin.html"));
 });
-app.get('/purchaseServices', (req, res) => { // test if server is running
+app.get('/purchaseServices', isUserLoggedIn, (req, res) => { // test if server is running
     res.sendFile(path.join(__dirname, "../customer/customerPurchaseServices.html"));
 });
-app.get('/myAccount', (req, res) => { // test if server is running
+app.get('/myAccount',isUserLoggedIn, (req, res) => { // test if server is running
     res.sendFile(path.join(__dirname, "../customer/customerHome.html"));
 });
-app.get('/myCart', (req, res) => { // test if server is running
+app.get('/myCart',isUserLoggedIn, (req, res) => { // test if server is running
     res.sendFile(path.join(__dirname, "../customer/customerCart.html"));
 });
-app.get('/customerEditInfo', (req, res) => { // test if server is running
+app.get('/customerEditInfo',isUserLoggedIn, (req, res) => { // test if server is running
     res.sendFile(path.join(__dirname, "../customer/customerEditInfo.html"));
 });
-app.get('/pastOrders', (req, res) => { // test if server is running
+app.get('/pastOrders',isUserLoggedIn, (req, res) => { // test if server is running
     res.sendFile(path.join(__dirname, "../customer/customerPastOrders.html"));
 });
-app.get('/purchaseConfirmed', (req, res) => { // test if server is running
+app.get('/purchaseConfirmed',isUserLoggedIn, (req, res) => { // test if server is running
     res.sendFile(path.join(__dirname, "../customer/customerPurchaseConfirmed.html"));
 });
 
@@ -79,19 +108,19 @@ app.get('/admin', (req, res) => {
 app.get('/companyLogin', (req, res) => { 
     res.sendFile(path.join(__dirname, "../company/companyLogin.html"));
 });
-app.get('/companyAccount', (req, res) => { 
+app.get('/companyAccount', isAdminLoggedIn,(req, res) => { 
     res.sendFile(path.join(__dirname, "../company/companyHome.html"));
 });
-app.get('/editAdminInfo', (req, res) => { 
+app.get('/editAdminInfo',isAdminLoggedIn, (req, res) => { 
     res.sendFile(path.join(__dirname, "../company/companyEditInfo.html"));
 });
-app.get('/editServices', (req, res) => { 
+app.get('/editServices',isAdminLoggedIn, (req, res) => { 
     res.sendFile(path.join(__dirname, "../company/companyEditServices.html"));
 });
-app.get('/unpaidBills', (req, res) => { 
+app.get('/unpaidBills',isAdminLoggedIn, (req, res) => { 
     res.sendFile(path.join(__dirname, "../company/companyUnpaidBills.html"));
 });
-app.get('/allServicesSold', (req, res) => { 
+app.get('/allServicesSold',isAdminLoggedIn, (req, res) => { 
     res.sendFile(path.join(__dirname, "../company/companyViewAllSales.html"));
 });
 
@@ -131,7 +160,10 @@ app.post("/customerLoginForm", (req, res) => {
             console.log(err);
         } else if (result.length > 0) {
              loggedUser_ID = result[0];
-            res.sendFile(path.join(__dirname, "../customer/customerPurchaseServices.html"));
+             req.session.user = {username};
+             const redirectTo = req.session.returnTo || 'purchaseServices';
+             delete req.session.returnTo;
+             res.redirect(redirectTo);
         } else {
             res.send(`
                 <!DOCTYPE html>
@@ -150,11 +182,11 @@ app.post("/customerLoginForm", (req, res) => {
       <div class="container mx-auto flex items-center space-x-4">
         <img
           class="logo h-8 w-8 md:h-12 md:w-12"
-          src="./assets/logo2.webp"
+          src="./assets/logo.jpg"
           alt="Service Pro Logo"
         />
         <a href="./customerLandingPage.html">
-          <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">
+          <h1 class="company-name-place text-lg md:text-2xl font-bold" style="color: #10cab7">
             Company_Name
           </h1>
         </a>
@@ -199,6 +231,16 @@ app.post("/customerLoginForm", (req, res) => {
         }
     });
 });
+// Customer Logout
+app.get('/api/logout', (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.send('Error logging out');
+      }
+      res.redirect('/');
+    });
+  });
+
 
 // Update customer info
 app.post("/updateCustomerInfo", (req,res)=>{
@@ -277,8 +319,10 @@ app.post("/adminLoginForm", (req, res) => {
             console.log(err);
         } else if (result.length > 0) {
             loggedAdmin_ID = result[0];
-            
-            res.sendFile(path.join(__dirname, "../company/companyHome.html"));
+            req.session.admin = {username};
+            const redirectTo = req.session.returnTo || 'companyAccount';
+            delete req.session.returnTo;
+            res.redirect(redirectTo);
         } else {
             res.send(` <!DOCTYPE html>
 <html lang="en">
@@ -296,11 +340,11 @@ app.post("/adminLoginForm", (req, res) => {
       <div class="container mx-auto flex items-center space-x-4">
         <img
           class="logo h-8 w-8 md:h-12 md:w-12"
-          src="./assets/logo2.webp"
+          src="./assets/logo.jpg"
           alt="Service Pro Logo"
         />
         <a href="./customerLandingPage.html">
-          <h1 class="text-lg md:text-2xl font-bold" style="color: #10cab7">
+          <h1  class="company-name-place text-lg md:text-2xl font-bold" style="color: #10cab7">
             Company_Name
           </h1>
         </a>
@@ -343,7 +387,15 @@ app.post("/adminLoginForm", (req, res) => {
         }
     });
 });
-
+// Admin Logout
+app.get('/api/AdminLogout', (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.send('Error logging out');
+      }
+      res.redirect('/admin');
+    });
+  });
 // Update admin info
 app.post("/updateAdminInfo", (req,res)=>{
     let updatedAdmin={
@@ -405,7 +457,7 @@ app.post("/updateCompanyInfo",upload.single('companyLogo'), (req,res)=>{
     });
 
 })
-app.get('/getCompany', (req, res) => { // get company info
+app.get('/api/getCompany', (req, res) => { // get company info
     const sql = `SELECT * FROM company_info`;
     db.query(sql, (err, result) => {
         if (err) {
@@ -451,7 +503,7 @@ app.get('/getcustomer/:id', (req, res) => { // get a specific customer by id
     });
 });
 
-app.get('/getLoggedUser', (req, res) => { // get a logged customer
+app.get('/api/getLoggedUser', (req, res) => { // get a logged customer
     const sql = `SELECT * FROM Customers WHERE customer_id = ${loggedUser_ID.customer_id}`;
     db.query(sql, (err, result) => {
         if (err) {
@@ -466,7 +518,7 @@ app.get('/getLoggedUser', (req, res) => { // get a logged customer
     });
 });
 
-app.get('/getLoggedAdmin', (req, res) => { // get a logged admin 
+app.get('/api/getLoggedAdmin', (req, res) => { // get a logged admin 
     const sql = `SELECT * FROM Admins WHERE admin_id = ${loggedAdmin_ID.admin_id}`;
     db.query(sql, (err, result) => {
         if (err) {

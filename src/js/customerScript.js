@@ -1,8 +1,9 @@
+ // Display the new company name
+const company = JSON.parse(localStorage.getItem("companyInfo"));
+const companyNamePlace = document.getElementsByClassName("company-name-place");
+companyNamePlace[0].innerHTML = company.company_name;
+companyNamePlace[1].innerHTML = company.company_name;
 
-  // Display the new company name
-  const company = JSON.parse(localStorage.getItem("companyInfo"));
-  const companyNamePlace = document.getElementById("company-name-place");
-  companyNamePlace.innerHTML = company.company_name;
 
 function showSignupForm() {
   document.getElementById("login-form").style.display = "none";

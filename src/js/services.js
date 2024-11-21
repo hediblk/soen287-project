@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const companyNamePlace = document.getElementById("company-name-place");
+  const companyNamePlace = document.getElementsByClassName("company-name-place");
   const logoPlace = document.getElementById("logo-place");
   let company;
 
   (async () => {
     try {
-      const response = await fetch("/getCompany");
+      const response = await fetch("/api/getCompany");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -13,7 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("companyInfo", JSON.stringify(company));
       // Update the DOM with fetched data
       if (company) {
-        companyNamePlace.innerHTML = company.company_name;
+        companyNamePlace[0].innerHTML = company.company_name;
+        companyNamePlace[1].innerHTML = company.company_name;
+        companyNamePlace[2].innerHTML = company.company_name;
       } else {
         console.error("Company data is undefined");
       }

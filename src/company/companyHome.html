@@ -83,8 +83,7 @@
         />
         <a href="companyAccount">
           <h1
-            id="company-name-place"
-            class="text-lg md:text-2xl font-bold"
+            class="company-name-place text-lg md:text-2xl font-bold"
             style="color: #10cab7"
           ></h1>
         </a>
@@ -106,7 +105,7 @@
           View All Services Sold
         </button>
         <button
-          onclick="location.href='admin'"
+          onclick="location.href='/api/AdminLogout'"
           style="border: none"
           class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition font-semibold"
         >
@@ -119,19 +118,22 @@
     <footer class="py-2 md:py-4 text-center bg-[#2c4755]">
       <p class="text-white">
         © 2024
-        <span style="color: #10cab7">Service Pro</span>
+        <span class="company-name-place" style="color: #10cab7"
+          >Service Pro</span
+        >
         - All Rights Reserved
       </p>
     </footer>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const companyNamePlace = document.getElementById("company-name-place");
+        const companyNamePlace =
+          document.getElementsByClassName("company-name-place");
         const logoPlace = document.getElementById("logo-place");
         let company;
 
         (async () => {
           try {
-            const response = await fetch("/getCompany");
+            const response = await fetch("/api/getCompany");
             if (!response.ok) {
               throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -139,7 +141,8 @@
             localStorage.setItem("companyInfo", JSON.stringify(company));
             // Update the DOM with fetched data
             if (company) {
-              companyNamePlace.innerHTML = company.company_name;
+              companyNamePlace[0].innerHTML = company.company_name;
+              companyNamePlace[1].innerHTML = company.company_name;
             } else {
               console.error("Company data is undefined");
             }

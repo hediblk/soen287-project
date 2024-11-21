@@ -1,7 +1,9 @@
-  // Display the new company name
-  const company = JSON.parse(localStorage.getItem("companyInfo"));
-  const companyNamePlace = document.getElementById("company-name-place");
-  companyNamePlace.innerHTML = company.company_name;
+ // Display the new company name
+const company = JSON.parse(localStorage.getItem("companyInfo"));
+const companyNamePlace = document.getElementsByClassName("company-name-place");
+companyNamePlace[0].innerHTML = company.company_name;
+companyNamePlace[1].innerHTML = company.company_name;
+
   
 function deleteCustomerAccountFun() {
     window.location.href = "deleteCustomerAccount";
@@ -19,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     (async () => {
       try {
-        const response = await fetch("/getLoggedUser");
+        const response = await fetch("/api/getLoggedUser");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

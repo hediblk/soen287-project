@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     (async () => {
       try {
-        const response = await fetch("/getLoggedAdmin");
+        const response = await fetch("/api/getLoggedAdmin");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })();
 
-    const companyNamePlace = document.getElementById("company-name-place");
+    const companyNamePlace = document.getElementsByClassName("company-name-place");
     const logoPlace = document.getElementById("logo-place");
     const companyName = document.getElementById("display-company-name");
     const companyAddress = document.getElementById("display-company-address");
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     (async () => {
       try {
-        const response = await fetch("/getCompany");
+        const response = await fetch("/api/getCompany");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -57,7 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
             companyName.innerHTML = company.company_name || "Name not available";
             companyAddress.innerHTML = company.company_address || "Address not available";
             companyLogo.src="../assets/logo.jpg";
-            companyNamePlace.innerHTML=company.company_name;
+            companyNamePlace[0].innerHTML=company.company_name;
+            companyNamePlace[1].innerHTML=company.company_name;
             logoPlace.src = "../assets/logo.jpg";
           
         } else {

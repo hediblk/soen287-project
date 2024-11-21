@@ -79,8 +79,7 @@
           />
           <a href="companyAccount">
             <h1
-              id="company-name-place"
-              class="text-lg md:text-2xl font-bold"
+              class="company-name-place text-lg md:text-2xl font-bold"
               style="color: #10cab7"
             ></h1>
           </a>
@@ -111,15 +110,19 @@
     <footer class="py-2 md:py-4 text-center bg-[#2c4755] mt-auto">
       <p class="text-white">
         © 2024
-        <span style="color: #10cab7">Service Pro</span>
+        <span class="company-name-place" style="color: #10cab7"
+          >Service Pro</span
+        >
         - All Rights Reserved
       </p>
     </footer>
     <script>
       // Display the new company name
       const company = JSON.parse(localStorage.getItem("companyInfo"));
-      const companyNamePlace = document.getElementById("company-name-place");
-      companyNamePlace.innerHTML = company.company_name;
+      const companyNamePlace =
+        document.getElementsByClassName("company-name-place");
+      companyNamePlace[0].innerHTML = company.company_name;
+      companyNamePlace[1].innerHTML = company.company_name;
     </script>
   </body>
 </html>

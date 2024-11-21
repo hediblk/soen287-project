@@ -1,3 +1,11 @@
+// Display the new company name
+const company = JSON.parse(localStorage.getItem("companyInfo"));
+const companyNamePlace = document.getElementsByClassName("company-name-place");
+companyNamePlace[0].innerHTML = company.company_name;
+companyNamePlace[1].innerHTML = company.company_name;
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
   const purchasedServices = JSON.parse(localStorage.getItem("purchasedServices")) || [{ name: "test", price: "100" }];
   const serviceDetailsDiv = document.getElementById("service-details");
