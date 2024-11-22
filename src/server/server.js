@@ -519,6 +519,18 @@ app.get('/api/getLoggedUser', (req, res) => { // get a logged customer
     });
 });
 
+app.get('/admins', (req, res) => { // get all customers to test if database works
+  const sql = 'SELECT * FROM admins';
+  db.query(sql, (err, result) => {
+      if (err) {
+          console.log(err);
+      } else {
+          res.send(result);
+      }
+  });
+});
+
+
 app.get('/api/getLoggedAdmin', (req, res) => { // get a logged admin 
     const sql = `SELECT * FROM Admins WHERE admin_id = ${loggedAdmin_ID.admin_id}`;
     db.query(sql, (err, result) => {

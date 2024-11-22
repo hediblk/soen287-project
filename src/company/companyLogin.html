@@ -135,7 +135,7 @@
               >Email:</label
             >
             <input
-              type="text"
+              type="email"
               id="email"
               name="email"
               required
@@ -161,12 +161,39 @@
               >User Name:</label
             >
             <input
+              onchange="validateUserName()"
               type="text"
               id="username2"
               name="username"
               required
               class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
             />
+            <p
+              id="invalidUser"
+              style="
+                color: red;
+                font-size: 0.875rem;
+                display: none;
+                align-items: center;
+                margin-top: 0.25rem;
+              "
+            >
+              <span style="color: red; margin-right: 0.5rem">X</span>Invalid
+              username
+            </p>
+            <p
+              id="validUser"
+              style="
+                color: green;
+                font-size: 0.875rem;
+                display: none;
+                align-items: center;
+                margin-top: 0.25rem;
+              "
+            >
+              <span style="color: green; margin-right: 0.5rem">✓</span>Valid
+              username
+            </p>
           </div>
 
           <div class="input-field mb-6">
@@ -176,10 +203,37 @@
             <input
               type="password"
               id="password2"
+              onchange="validatePassword()"
               name="password"
               required
               class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
             />
+            <p
+              id="invalidPassword"
+              style="
+                color: red;
+                font-size: 0.875rem;
+                display: none;
+                align-items: center;
+                margin-top: 0.25rem;
+              "
+            >
+              <span style="color: red; margin-right: 0.5rem">X</span>Invalid
+              password (should be more than 8 characters)
+            </p>
+            <p
+              id="validPassword"
+              style="
+                color: green;
+                font-size: 0.875rem;
+                display: none;
+                align-items: center;
+                margin-top: 0.25rem;
+              "
+            >
+              <span style="color: green; margin-right: 0.5rem">✓</span>Valid
+              password
+            </p>
           </div>
 
           <div class="input-field mb-6">
@@ -191,15 +245,43 @@
             <input
               type="password"
               id="confirm-password"
+              onchange="confirmPassword()"
               name="confirm-password"
               required
               class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
             />
+            <p
+              id="unmatchedPassword"
+              style="
+                color: red;
+                font-size: 0.875rem;
+                display: none;
+                align-items: center;
+                margin-top: 0.25rem;
+              "
+            >
+              <span style="color: red; margin-right: 0.5rem">X</span>Unmatched
+              password
+            </p>
+            <p
+              id="matchedPassword"
+              style="
+                color: green;
+                font-size: 0.875rem;
+                display: none;
+                align-items: center;
+                margin-top: 0.25rem;
+              "
+            >
+              <span style="color: green; margin-right: 0.5rem">✓</span>Matched
+              password
+            </p>
           </div>
 
           <button
             type="submit"
-            onclick="showLoginForm()"
+            id="createAccountBtn"
+            onsubmit="showLoginForm()"
             class="login-btn w-full bg-teal-600 text-white py-2 rounded-md hover:bg-teal-700 transition duration-200"
           >
             Create Account
