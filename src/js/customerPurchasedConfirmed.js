@@ -16,14 +16,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const today = new Date();
     const date = today.toLocaleDateString();
     const time = today.toLocaleTimeString();
-    const finalPrice = parseFloat(localStorage.getItem("finalPrice"));
+    const finalPrice = parseFloat(localStorage.getItem("finalPrice"), 10);
+    const isPaid = parseInt(localStorage.getItem("isPaid"));
 
     fetch("/api/customerOrder", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ purchasedServices, finalPrice }),
+      body: JSON.stringify({ purchasedServices, finalPrice, isPaid }),
     })
       .then((response) => response.json())
       .then((data) => {

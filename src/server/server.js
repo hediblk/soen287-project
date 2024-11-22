@@ -548,17 +548,17 @@ app.get('/api/getServices', (req, res) => { // get all services
 
 app.post('/api/customerOrder', (req, res) => { // purchase a service
   const customerID = loggedUser_ID.customer_id;
-  const { purchasedServices, finalPrice } = req.body;
+  const { purchasedServices, finalPrice, isPaid } = req.body;
 
   if (!customerID || !finalPrice || !Array.isArray(purchasedServices)) {
-    console.log(customerID, finalPrice, purchasedServices);
+    console.log(customerID, finalPrice, isPaid);
     console.log("Invalid request data");
     return;
   }
 
   const insertOrderSQL = `
         INSERT INTO Orders (customer_id, purchase_date, total_amount, is_paid)
-        VALUES (${customerID}, NOW(), ${finalPrice}, true)
+        VALUES (${customerID}, NOW(), ${finalPrice}, ${isPaid})
     `;
 
   db.query(insertOrderSQL, (err, orderResult) => {

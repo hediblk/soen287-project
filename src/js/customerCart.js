@@ -60,6 +60,14 @@ document.addEventListener('DOMContentLoaded', function() {
         <p class="text-lg">Total Price (before tax): $${totalPrice.toFixed(2)}</p>
         <p class="text-lg">Taxes (15%): $${taxes.toFixed(2)}</p>
         <p class="text-lg font-bold">Final Price: $${finalPrice.toFixed(2)}</p>
+        <div class="mt-4">
+          <label>
+            <input type="radio" name="payment" value="1" checked> Pay Now
+          </label>
+          <label class="ml-4">
+            <input type="radio" name="payment" value="0"> Pay Later
+          </label>
+        </div>
       `;
       cartContainer.appendChild(summaryDiv);
 
@@ -79,10 +87,17 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add event listener to "Confirm Purchase" button
   const confirmPurchaseBtn = document.getElementById("confirm-purchase-btn");
   confirmPurchaseBtn.addEventListener("click", () => {
+    
+    const paymentOption = document.querySelector('input[name="payment"]:checked').value;
+    const isPaid = parseInt(paymentOption, 10);
+    localStorage.setItem("isPaid", isPaid); // Store payment status in local storage
+
     const purchasedServices = [...selectedServices]; // Copy all data from selectedServices
     localStorage.setItem("purchasedServices", JSON.stringify(purchasedServices)); // Store in local storage
+    
     selectedServices.length = 0; // Clear selectedServices
     localStorage.setItem("selectedServices", JSON.stringify(selectedServices)); // Update local storage
+    
     updateCart(); // Update the cart display
   });
   
