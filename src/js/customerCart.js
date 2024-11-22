@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         row.className = "border-t";
 
         row.innerHTML = `
-          <td class="py-2 text-center">${service.name}</td>
+          <td class="py-2 text-center">${service.label}</td>
           <td class="py-2 text-center">$${service.price}</td>
           <td class="py-2 text-center">
             <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded" data-index="${index}">Delete</button>
@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const taxes = totalPrice * 0.15;
       const finalPrice = totalPrice + taxes;
+      localStorage.setItem("finalPrice", finalPrice);
 
       const summaryDiv = document.createElement("div");
       summaryDiv.className = "mt-4 p-4 bg-gray-100 rounded";

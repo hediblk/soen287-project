@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "../")));
 app.use(express.static(path.join(__dirname, '../public')));//Added the styles files in public so we can display Tailwind
@@ -532,6 +533,61 @@ app.get('/api/getLoggedAdmin', (req, res) => { // get a logged admin
         }
     });
 });
+
+
+app.get('/api/getServices', (req, res) => { // get all services
+    const sql = "SELECT * FROM Services";
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+app.post('/api/customerOrder', (req, res) => { // purchase a service
+  const customerID = loggedUser_ID.customer_id;
+  const { purchasedServices, finalPrice } = req.body;
+
+  if (!customerID || !finalPrice || !Array.isArray(purchasedServices)) {
+    console.log(customerID, finalPrice, purchasedServices);
+    console.log("Invalid request data");
+    return;
+  }
+
+  const insertOrderSQL = `
+        INSERT INTO Orders (customer_id, purchase_date, total_amount, is_paid)
+        VALUES (${customerID}, NOW(), ${finalPrice}, true)
+    `;
+
+  db.query(insertOrderSQL, (err, orderResult) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    const orderId = orderResult.insertId;
+
+    purchasedServices.forEach((service, index) => {
+      const insertOrderItemSQL = `
+            INSERT INTO Order_items (order_id, service_id, price_at_purchase)
+            VALUES (${orderId}, ${service.service_id}, ${service.price})
+        `;
+
+      db.query(insertOrderItemSQL, (err) => {
+        if (err) {
+            console.log(err);
+            return
+        }
+      });
+    });    
+  });
+
+  console.log("Order placed successfully");
+  res.send("Order placed successfully");
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

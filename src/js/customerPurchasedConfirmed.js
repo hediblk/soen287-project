@@ -16,26 +16,48 @@ document.addEventListener("DOMContentLoaded", function () {
     const today = new Date();
     const date = today.toLocaleDateString();
     const time = today.toLocaleTimeString();
+    const finalPrice = parseFloat(localStorage.getItem("finalPrice"));
 
+    fetch("/api/customerOrder", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ purchasedServices, finalPrice }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+    
     // Display date and time at the top
     const dateTimeDiv = document.createElement("div");
     dateTimeDiv.className = "date-time";
     dateTimeDiv.innerHTML = `
-      <strong>Order number #1111</strong><br>
-      <strong>Date:</strong>${date}<br>
-      <strong>Time:</strong> ${time}<br><br>
+    <strong>Order number #1111</strong><br>
+    <strong>Final Price: $</strong>${finalPrice.toFixed(2)}<br>
+    <strong>Date:</strong>${date}<br>
+    <strong>Time:</strong> ${time}<br><br>
     `;
     serviceDetailsDiv.appendChild(dateTimeDiv);
-
+    
     // Display each service with its price
     purchasedServices.forEach((service) => {
       const serviceDiv = document.createElement("div");
       serviceDiv.className = "service-item";
       serviceDiv.innerHTML = `
-        <strong>Service: </strong>${service.name}<br>
-        <strong>Price:</strong> $${service.price}<br><br>
+      <strong>Service: </strong>${service.label}<br>
+      <strong>Price:</strong> $${service.price}<br><br>
       `;
       serviceDetailsDiv.appendChild(serviceDiv);
     });
+
+    //localStorage.removeItem("finalPrice");
+    //purchasedServices = [];
+    //localStorage.setItem("purchasedServices", JSON.stringify(purchasedServices));
   }
 });
