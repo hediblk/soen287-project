@@ -12,18 +12,16 @@ This is a group project for the SOEN 287 class at Concordia University. The proj
 ### Technologies used
 We are using **HTML**, **CSS**, and **JavaScript** for the frontend. **tailwindcss** is also used for styling.
 
-**Node.js** and some type of database (not chosen yet) will be used for the backend in the next deliverable.
+**Node.js** and **MySQL** are used for the backend.
 
-
-## Project Structure
-This deliverable only concerns the frontend part of the project. Most features are either static or simulated with dummy data as we are not connected to the backend yet to perform calculations, store or validate data.
 
 ## User Guide
 **Please make sure to follow the `Running the project` section below to run the project properly.**
 
 We have included 2 types of users in the project: **Company** and **Customer**. Both have one hard coded account each (it is always possible to dynamically create new ones of course). The login credentials are as follows:<br>
-- **Company**: username: `company1`, password: `go`<br>
-- **Customer**: username: `client1`, password: `go`<br>
+- **Company**: username: `admin1`, password: `go`<br>
+- **Customer 1**: username: `customer1`, password: `go`<br>
+- **Customer 2**: username: `customer2`, password: `go`<br>
 
 The main entry point of the project is the `landingPage.html` file. From there, you can navigate to the login/signup page and login with the credentials above for the **Company** account. Once logged in, you will see a dashboard that allows you to edit company information, add services, and view services sold. You can also logout from the dashboard.
 
@@ -36,12 +34,8 @@ The **purchase services** page displays a list of services offered by the compan
 ## Running the project
 1. Clone the repository
 2. Run `npm install` to install the dependencies.
-3. To build the CSS file using tailwind, run:<br>`npx tailwindcss -i src/styles/input.css -o src/styles/output.css --watch`
-4. Make sure to have `Live Server` extension installed on VSCode
-5. Run the project using `Live Server` extension on VSCode by right clicking on `landingPage.html` and selecting `Open with Live Server`.
-This will open the project in your default browser.
-6. Use the login credentials mentioned above to login or create your own.
-
->**Note:** Live Server is needed to avoid errors caused by browser security rules when loading files directly, as it simulates a local server environment. 
-
-You can still simply open the `landingPage.html` file in your browser directly, but some features may not work properly, such as the ability to view any services or make purchases from a client account since this feature relies on reading the array of services from local storage.
+3. To build the CSS file using tailwind, run:<br>`npx tailwindcss -i src/styles/input.css -o src/styles/output.css --watch`.
+4. Start the MySQL database from the XAMPP app.
+5. Run `node src/server/server.js` to start the server, using **nodemon** instead of node works fine too.
+6. Go to `localhost:3000` in your browser.
+7. Use the login credentials mentioned above to login or create your own.
