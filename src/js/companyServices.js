@@ -7,17 +7,28 @@ companyNamePlace[1].innerHTML = company.company_name;
 
 
 
+async function fetchServices() {
+  try {
+    const response = await fetch("/api/getServices");
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const services = await response.json();
+    console.log("Services fetched:", services);
+    return services;
+  } catch (error) {
+    console.error("Failed to fetch services:", error);
+    return [];
+  }
+}
 
 
-// Load the services array from localStorage if available; otherwise, initialize an empty array
-let servicesArray = JSON.parse(localStorage.getItem("servicesArray")) || [];
-
-// Function to save the current servicesArray to localStorage
+// Function to save the current servicesArray to localStorage      ///////// THIS
 function saveServicesToLocalStorage() {
   localStorage.setItem("servicesArray", JSON.stringify(servicesArray));
 }
 
-// Function to add a new service
+// Function to add a new service  ///////// THIS
 document.getElementById("add-service-form").addEventListener("submit", function (event) {
   event.preventDefault();
   const serviceName = document.getElementById("new-service-name").value;
@@ -33,7 +44,7 @@ document.getElementById("add-service-form").addEventListener("submit", function 
   }
 });
 
-// Function to add a service to the list in the DOM
+// Function to add a service to the list in the DOM       ///////// THIS
 function addService(name, price) {
   const li = document.createElement("li");
   li.innerHTML = `
@@ -68,7 +79,7 @@ function editService(button) {
   printServices(); // Update the display
 }
 
-// Function to delete a service
+// Function to delete a service              ///////// THIS
 function deleteService(button) {
   if (confirm("Are you sure you want to delete this service?")) {
     const li = button.parentElement.parentElement;
@@ -82,7 +93,7 @@ function deleteService(button) {
 
 // Function to update the servicesArray after an edit or delete operation
 function updateServicesArray() {
-  servicesArray = []; // Clear the array
+  servicesArray = [];
   document.querySelectorAll("#service-list li").forEach((li) => {
     const name = li.querySelector(".service-name").textContent;
     const price = li.querySelector(".service-price").textContent.replace("$", ""); // Remove dollar sign before saving
@@ -90,15 +101,17 @@ function updateServicesArray() {
   });
 }
 
-// Function to display the services array in the HTML using map()
-function printServices() {
-  const servicesListDiv = document.getElementById("service-list");
-  servicesListDiv.innerHTML = ""; // Clear the current display
 
-  servicesArray.map((service) => {
+async function printServices() {
+  const servicesListDiv = document.getElementById("service-list");
+  servicesListDiv.innerHTML = "";
+
+  const storedServices = await fetchServices();
+
+  storedServices.map((service) => {
     const li = document.createElement("li");
     li.innerHTML = `
-            <span class="service-name">${service.name}</span>
+            <span class="service-name">${service.label}</span>
             <span class="service-price">$${service.price}</span>
             <span>
                 <button onclick="editService(this)">Edit</button>
@@ -109,7 +122,7 @@ function printServices() {
   });
 }
 
-// Initially load services and display them on page load
+
 document.addEventListener("DOMContentLoaded", function () {
-  printServices(); // Display the initial services
+  printServices();
 });
