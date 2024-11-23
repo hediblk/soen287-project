@@ -14,125 +14,47 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
     <title>View All Sales</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f4f8;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-      h1 {
-        text-align: center;
-        font-size: 2em;
-        color: #2c3e50;
-        margin-bottom: 20px;
-      }
-      .main-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex-grow: 1;
-        padding: 20px;
-      }
-      .receipt-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        max-width: 1200px;
-        width: 100%;
-      }
-      .receipt-box {
-        background-color: #ffffff;
-        border: 1px solid #ddd;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      }
-      .receipt-box h2 {
-        font-size: 1.2em;
-        color: #10cab7;
-        margin-bottom: 10px;
-      }
-      .receipt-detail {
-        margin-bottom: 8px;
-        color: #333;
-      }
-      .receipt-detail strong {
-        color: #555;
-      }
-    </style>
   </head>
 
-  <body>
-    <!-- Header Section -->
-    <header class="header bg-white py-2 md:py-4">
-      <div class="container mx-auto flex items-center space-x-4">
-        <img
-          class="logo h-8 w-8 md:h-12 md:w-12"
-          src="../assets/logo.jpg"
-          alt="Service Pro Logo"
-        />
-        <a href="companyAccount">
-          <h1
-            class="company-name-place text-lg md:text-2xl font-bold"
-            style="color: #10cab7"
-          ></h1>
-        </a>
-      </div>
-    </header>
-
-    <!-- Main Content -->
-    <div class="main-content">
-      <h1>All Services Purchased</h1>
-      <div class="receipt-grid">
-        <!-- Receipt 1 -->
-        <div class="receipt-box">
-          <h2>Company Name: XYZ Corp</h2>
-          <p class="receipt-detail">
-            <strong>Service(s) Purchased:</strong> Newcomer Package, Deluxe
-            Package
-          </p>
-          <p class="receipt-detail"><strong>Total Price:</strong> $125.00</p>
-          <p class="receipt-detail"><strong>Date:</strong> 2024-01-15</p>
-          <p class="receipt-detail"><strong>Time:</strong> 14:30</p>
-          <p class="receipt-detail"><strong>Status:</strong> Paid</p>
+    <body class="flex flex-col min-h-screen bg-gray-100">
+      <!-- Header Section -->
+      <header class="header bg-white py-2 md:py-4">
+        <div class="container mx-auto flex items-center space-x-4">
+          <img
+            class="logo h-8 w-8 md:h-12 md:w-12"
+            src="../assets/logo.jpg"
+            alt="Service Pro Logo"
+          />
+          <a href="companyAccount">
+            <h1
+              class="company-name-place text-lg md:text-2xl font-bold"
+              style="color: #10cab7"
+            ></h1>
+          </a>
         </div>
-
-        <!-- Receipt 2 -->
-        <div class="receipt-box">
-          <h2>Company Name: ABC Ltd</h2>
-          <p class="receipt-detail">
-            <strong>Service(s) Purchased:</strong> King's Package
-          </p>
-          <p class="receipt-detail"><strong>Total Price:</strong> $250.00</p>
-          <p class="receipt-detail"><strong>Date:</strong> 2024-01-14</p>
-          <p class="receipt-detail"><strong>Time:</strong> 09:00</p>
-          <p class="receipt-detail"><strong>Status:</strong> Unpaid</p>
-        </div>
-        <!-- Additional receipts can be added here following the same structure -->
-      </div>
-    </div>
-
-    <!-- Footer Section -->
-    <footer class="py-2 md:py-4 text-center bg-[#2c4755] mt-auto">
-      <p class="text-white">
-        © 2024
-        <span class="company-name-place" style="color: #10cab7"
-          >Service Pro</span
+      </header>
+  
+      <!-- Main Content -->
+      <main class="container mx-auto py-6 flex-grow">
+        <div
+          id="past-orders-container"
+          class="flex flex-wrap gap-6 justify-center items-stretch"
         >
-        - All Rights Reserved
-      </p>
-    </footer>
+          <!-- Orders will be injected here -->
+        </div>
+      </main>
+  
+      <!-- Footer Section -->
+      <footer class="py-2 md:py-4 text-center bg-[#2c4755]">
+        <p class="text-white">
+          © 2024
+          <span class="company-name-place" style="color: #10cab7"
+            >Service Pro</span
+          >
+          - All Rights Reserved
+        </p>
+      </footer>
 
-    <script>
-      // Display the new company name
-      const company = JSON.parse(localStorage.getItem("companyInfo"));
-      const companyNamePlace =
-        document.getElementsByClassName("company-name-place");
-      companyNamePlace[0].innerHTML = company.company_name;
-      companyNamePlace[1].innerHTML = company.company_name;
-    </script>
+    <script src= "../js/companyAllOrders.js"></script>
   </body>
 </html>
