@@ -65,7 +65,6 @@ function resetButtons() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  //displayServices();
   resetButtons();
 });
 
