@@ -601,6 +601,52 @@ app.post('/api/customerOrder', (req, res) => { // purchase a service
 });
 
 
+app.get('/api/getPastOrders', (req, res) => { // get all past orders
+  const sql = `
+        SELECT o.order_id, o.purchase_date, o.total_amount, o.is_paid,
+               GROUP_CONCAT(s.label SEPARATOR ', ') AS service_labels
+        FROM Orders o
+        LEFT JOIN Order_items oi ON o.order_id = oi.order_id
+        LEFT JOIN Services s ON oi.service_id = s.service_id
+        WHERE o.customer_id = ${loggedUser_ID.customer_id}
+        GROUP BY o.order_id
+        ORDER BY o.purchase_date DESC
+    `;
+  db.query(sql, (err, result) => {
+      if (err) {
+          console.log(err);
+      } if (result.length === 0) {
+        return res.status(404).send("No orders found for this customer");
+      }
+
+      const orders = result.map((row) => ({
+        order_id: row.order_id,
+        purchase_date: row.purchase_date,
+        total_amount: row.total_amount,
+        is_paid: row.is_paid,
+        service_labels: row.service_labels,
+      }));
+      if (orders.length === 0) {
+        res.status(200).send("No orders found for this customer");
+      } else {
+        res.status(200).json(orders);
+      }
+  });
+});
+
+app.get('/api/updatePaymentStatus/:order_id', (req, res) => { // update payment status
+  const orderId = req.params.order_id;
+  const sql = `UPDATE Orders SET is_paid = 1 WHERE order_id = ${orderId}`;
+  db.query(sql, (err, result) => {
+      if (err) {
+          console.log(err);
+      } else {
+          res.send(result);
+      }
+  });
+});
+
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
