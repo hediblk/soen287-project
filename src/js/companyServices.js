@@ -79,7 +79,7 @@ function editService(button) {
   printServices(); // Update the display
 }
 
-// Function to delete a service              ///////// THIS
+// Function to delete a service              
 async function deleteService(button) {
   if (confirm("Are you sure you want to delete this service?")) {
     const storedServices = await fetchServices();
