@@ -615,24 +615,26 @@ app.get('/api/getPastOrders', (req, res) => { // get all past orders
         ORDER BY o.purchase_date DESC
     `;
   db.query(sql, (err, result) => {
-      if (err) {
-          console.log(err);
-      } if (result.length === 0) {
-        return res.status(404).send("No orders found for this customer");
-      }
+    if (err) {
+        console.log(err);
+        return;
+      } 
 
-      const orders = result.map((row) => ({
-        order_id: row.order_id,
-        purchase_date: row.purchase_date,
-        total_amount: row.total_amount,
-        is_paid: row.is_paid,
-        service_labels: row.service_labels,
-      }));
-      if (orders.length === 0) {
-        res.status(200).send("No orders found for this customer");
-      } else {
-        res.status(200).json(orders);
-      }
+      if (result.length === 0) {
+        res.status(200).json("You haven't placed any orders yet!");
+        return;
+    }
+
+    const orders = result.map((row) => ({
+      order_id: row.order_id,
+      purchase_date: row.purchase_date,
+      total_amount: row.total_amount,
+      is_paid: row.is_paid,
+      service_labels: row.service_labels,
+    }));
+    
+    res.status(200).json(orders);
+
   });
 });
 
@@ -646,11 +648,6 @@ app.get('/api/updatePaymentStatus/:order_id', (req, res) => { // update payment 
           res.send(result);
       }
   });
-});
-
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
 });
 
 
@@ -670,24 +667,27 @@ app.get('/api/getCompanyPastOrders', (req, res) => {
         
     `;
   db.query(sql, (err, result) => {
-      if (err) {
-          console.log(err);
-      } if (result.length === 0) {
-        return res.status(404).send("No orders found");
-      }
+    if (err) {
+        console.log(err);
+    } if (result.length === 0) {
+      res.status(200).json("No orders found");
+      return;
+    }
 
-      const orders = result.map((row) => ({
+    const orders = result.map((row) => ({
 
-        order_id: row.order_id,
-        purchase_date: row.purchase_date,
-        total_amount: row.total_amount,
-        is_paid: row.is_paid,
-        service_labels: row.service_labels,
-      }));
-      if (orders.length === 0) {
-        res.status(200).send("No orders");
-      } else {
-        res.status(200).json(orders);
-      }
+      order_id: row.order_id,
+      purchase_date: row.purchase_date,
+      total_amount: row.total_amount,
+      is_paid: row.is_paid,
+      service_labels: row.service_labels,
+    }));
+
+    res.status(200).json(orders);
   });
+});
+
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });

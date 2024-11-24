@@ -25,7 +25,7 @@ async function fetchPastOrders() {
 
 function displayNoOrdersMessage(message) {
     const pastOrdersContainer = document.getElementById("past-orders-container");
-    pastOrdersContainer.innerHTML = `<p>${message}</p>`;
+    pastOrdersContainer.innerHTML = `<p><em>${message}</em></p>`;
 }
 
 function displayPastOrders(pastOrders) {
