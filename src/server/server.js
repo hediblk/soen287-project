@@ -267,18 +267,42 @@ app.post("/updateCustomerInfo", (req,res)=>{
 })
 
 // Delete a customer Account
-app.get("/deleteCustomerAccount", (req,res)=>{
-   
-    let sql = `DELETE FROM Customers WHERE customer_id = ${loggedUser_ID.customer_id}`;
-    db.query(sql, (err, result) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.sendFile(path.join(__dirname, "../customerLandingPage.html"));
-        } 
-    });
+app.get("/deleteCustomerAccount", (req, res) => {
+  const customerId = loggedUser_ID.customer_id;
 
-})
+  // Step 1: Delete the order items related to the customer’s orders
+  let deleteOrderItemsSql = `DELETE FROM order_items WHERE order_id IN (SELECT order_id FROM orders WHERE customer_id = ${customerId})`;
+  
+  db.query(deleteOrderItemsSql, (err) => {
+      if (err) {
+          console.log("Error deleting order items:", err);
+          res.status(500).send("Error deleting order items");
+          return;
+      }
+
+      // Step 2: Delete the orders related to the customer
+      let deleteOrdersSql = `DELETE FROM orders WHERE customer_id = ${customerId}`;
+      db.query(deleteOrdersSql, (err, result) => {
+          if (err) {
+              console.log("Error deleting orders:", err);
+              res.status(500).send("Error deleting orders");
+              return;
+          }
+
+          // Step 3: After successfully deleting the orders, delete the customer
+          let deleteCustomerSql = `DELETE FROM Customers WHERE customer_id = ${customerId}`;
+          db.query(deleteCustomerSql, (err, result) => {
+              if (err) {
+                  console.log("Error deleting customer:", err);
+                  res.status(500).send("Error deleting customer");
+              } else {
+                  
+                  res.redirect('/');
+              }
+          });
+      });
+  });
+});
 
 
 
