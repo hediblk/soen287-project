@@ -23,43 +23,11 @@ async function fetchServices() {
 }
 
 
-// Function to save the current servicesArray to localStorage      ///////// THIS
-function saveServicesToLocalStorage() {
-  localStorage.setItem("servicesArray", JSON.stringify(servicesArray));
-}
 
-// Function to add a new service  ///////// THIS
-document.getElementById("add-service-form").addEventListener("submit", function (event) {
- 
-  const serviceName = document.getElementById("new-service-name").value;
-  const servicePrice = document.getElementById("new-service-price").value;
-
-  if (serviceName.trim() !== "" && servicePrice.trim() !== "") {
-    addService(serviceName, servicePrice);
-    servicesArray.push({ name: serviceName, price: parseFloat(servicePrice).toFixed(2) }); // Add to the global array
-    saveServicesToLocalStorage(); // Save updated array to localStorage
-    printServices(); // Update the display
-    document.getElementById("new-service-name").value = "";
-    document.getElementById("new-service-price").value = "";
-  }
-});
-
-// Function to add a service to the list in the DOM       ///////// THIS
-function addService(name, price) {
-  const li = document.createElement("li");
-  li.innerHTML = `
-        <span class="service-name">${name}</span>
-        <span class="service-price">$${parseFloat(price).toFixed(2)}</span>
-        <span>
-            <button onclick="editService(this)">Edit</button>
-            <button onclick="deleteService(this)">Delete</button>
-        </span>
-    `;
-  document.getElementById("service-list").appendChild(li);
-}
 
 // Function to edit an existing service
-function editService(button) {
+async function editService(button) {
+  const storedServices = await fetchServices();
   const li = button.parentElement.parentElement;
   const serviceName = li.querySelector(".service-name").textContent;
   const servicePrice = li.querySelector(".service-price").textContent.replace("$", ""); // Remove dollar sign for editing
@@ -74,9 +42,31 @@ function editService(button) {
     li.querySelector(".service-price").textContent = `$${parseFloat(newServicePrice).toFixed(2)}`;
   }
 
-  updateServicesArray(); // Update the global array after editing
-  saveServicesToLocalStorage(); // Save updated array to localStorage
-  printServices(); // Update the display
+  let serviceToEdit = storedServices.find(
+    (service) => service.label.trim().toLowerCase() === serviceName.toLowerCase()
+  );
+
+  fetch(`/api/editService`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      label: newServiceName,
+      price: newServicePrice,
+      service_id: serviceToEdit.service_id,
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      console.log("Service edited successfully");
+    })
+    .catch((error) => {
+      console.error("Failed to edit service:", error);
+    });
+
 }
 
 // Function to delete a service              
@@ -91,20 +81,9 @@ async function deleteService(button) {
       (service) => service.label.trim().toLowerCase() === serviceName.toLowerCase()
     );
    
-    window.location.href = `/deleteService/${serviceToDelete.service_id}`;
+    window.location.href = `/api/deleteService/${serviceToDelete.service_id}`;
   }
 }
-
-// Function to update the servicesArray after an edit or delete operation
-function updateServicesArray() {
-  servicesArray = [];
-  document.querySelectorAll("#service-list li").forEach((li) => {
-    const name = li.querySelector(".service-name").textContent;
-    const price = li.querySelector(".service-price").textContent.replace("$", ""); // Remove dollar sign before saving
-    servicesArray.push({ name, price });
-  });
-}
-
 
 async function printServices() {
   const servicesListDiv = document.getElementById("service-list");
@@ -116,7 +95,7 @@ async function printServices() {
     const li = document.createElement("li");
     li.innerHTML = `
             <span class="service-name">${service.label}</span>
-            <span class="service-price">$${service.price}</span>
+            <span class="service-price">$${parseFloat(service.price).toFixed(2)}</span>
             <span>
                 <button onclick="editService(this)">Edit</button>
                 <button onclick="deleteService(this)">Delete</button>

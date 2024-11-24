@@ -713,7 +713,7 @@ app.get('/api/getCompanyPastOrders', (req, res) => {
 
 
 // Add a Service
-app.post("/addService", (req,res)=>{
+app.post("/api/addService", (req,res)=>{
     
   let service={
       label:req.body.serviceName,
@@ -731,8 +731,24 @@ app.post("/addService", (req,res)=>{
 
 });
 
+// Edit a Service
+app.post("/api/editService", (req,res)=>{
+
+  const { label, price, service_id } = req.body;
+
+  let sql = `UPDATE services SET ? WHERE service_id = ${service_id}`;
+  db.query(sql, { label, price }, (err, result) => {
+      if (err) {
+          console.log(err);
+      } else {
+          res.send(result);
+      }
+  });
+
+})
+
 // Delete a Service
-app.get("/deleteService/:id", (req,res)=>{
+app.get("/api/deleteService/:id", (req,res)=>{
    
   let sql = `DELETE FROM services WHERE service_id = ${ req.params.id}`;
   db.query(sql, (err, result) => {
@@ -744,6 +760,7 @@ app.get("/deleteService/:id", (req,res)=>{
   });
 
 })
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

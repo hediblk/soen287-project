@@ -39,19 +39,19 @@
     </header>
 
     <div class="flex-grow my-6">
-      <form action="addService" method="post" id="add-service-form">
+      <form action="api/addService" method="post" id="add-service-form">
         <input
           type="text"
           id="new-service-name"
           name="serviceName"
-          placeholder="Enter new cleaning service"
+          placeholder="Enter new service name"
           required
         />
         <input
           type="number"
           id="new-service-price"
           name="servicePrice"
-          placeholder="Enter price"
+          placeholder="Enter price in $"
           required
         />
         <button type="submit">Add Service</button>
