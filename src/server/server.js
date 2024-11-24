@@ -688,6 +688,39 @@ app.get('/api/getCompanyPastOrders', (req, res) => {
 });
 
 
+// Add a Service
+app.post("/addService", (req,res)=>{
+    
+  let service={
+      label:req.body.serviceName,
+      price:req.body.servicePrice,
+  }
+  let sql = "INSERT INTO services SET ?";
+  db.query(sql,service, (err, result) => {
+      if (err) {
+          console.log(err);
+      } else {
+          
+          res.redirect('/editServices');
+      }
+  });
+
+});
+
+// Delete a Service
+app.get("/deleteService/:id", (req,res)=>{
+   
+  let sql = `DELETE FROM services WHERE service_id = ${ req.params.id}`;
+  db.query(sql, (err, result) => {
+      if (err) {
+          console.log(err);
+      } else {
+        res.redirect('/editServices');
+      } 
+  });
+
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

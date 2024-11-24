@@ -30,7 +30,7 @@ function saveServicesToLocalStorage() {
 
 // Function to add a new service  ///////// THIS
 document.getElementById("add-service-form").addEventListener("submit", function (event) {
-  event.preventDefault();
+ 
   const serviceName = document.getElementById("new-service-name").value;
   const servicePrice = document.getElementById("new-service-price").value;
 
@@ -80,14 +80,18 @@ function editService(button) {
 }
 
 // Function to delete a service              ///////// THIS
-function deleteService(button) {
+async function deleteService(button) {
   if (confirm("Are you sure you want to delete this service?")) {
-    const li = button.parentElement.parentElement;
-    li.remove();
+    const storedServices = await fetchServices();
+    const parentElement = button.parentElement.parentElement;
 
-    updateServicesArray(); // Update the global array after deletion
-    saveServicesToLocalStorage(); // Save updated array to localStorage
-    printServices(); // Update the display
+    // Get the content of the first <span> within the parent element
+    const serviceName = parentElement.querySelector('.service-name').textContent;
+    let serviceToDelete=storedServices.find(
+      (service) => service.label.trim().toLowerCase() === serviceName.toLowerCase()
+    );
+   
+    window.location.href = `/deleteService/${serviceToDelete.service_id}`;
   }
 }
 
