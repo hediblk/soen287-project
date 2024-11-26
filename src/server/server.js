@@ -678,13 +678,15 @@ app.get('/api/updatePaymentStatus/:order_id', (req, res) => { // update payment 
 // get all past orders Without a client ID (Company Facing)
 app.get('/api/getCompanyPastOrders', (req, res) => { 
   const sql = `
-        SELECT o.order_id, o.purchase_date, o.total_amount, o.is_paid,
-               GROUP_CONCAT(s.label SEPARATOR ', ') AS service_labels
+        SELECT o.order_id, o.purchase_date, o.total_amount, o.is_paid, o.customer_id, c.first_name, c.last_name,
+              GROUP_CONCAT(s.label SEPARATOR ', ') AS service_labels
         FROM Orders o
         LEFT JOIN Order_items oi 
-        ON o.order_id = oi.order_id
+          ON o.order_id = oi.order_id
         LEFT JOIN Services s 
-        ON oi.service_id = s.service_id       
+          ON oi.service_id = s.service_id 
+        INNER JOIN Customers c
+          ON c.customer_id = o.customer_id
         GROUP BY o.order_id
         ORDER BY o.purchase_date DESC
         
@@ -700,6 +702,7 @@ app.get('/api/getCompanyPastOrders', (req, res) => {
     const orders = result.map((row) => ({
 
       order_id: row.order_id,
+      customer_name: `${row.first_name} ${row.last_name}`,
       purchase_date: row.purchase_date,
       total_amount: row.total_amount,
       is_paid: row.is_paid,

@@ -40,6 +40,7 @@ function displayPastOrders(pastOrders) {
         orderDiv.className = "receipt-box bg-white p-6 rounded-lg shadow-lg border border-gray-200 w-full md:w-1/2 lg:w-1/3";
         orderDiv.innerHTML = `
             <h2 class="text-xl font-bold mb-2">Order number #${order.order_id}</h2>
+            <p><strong>Customer Name:</strong> ${order.customer_name}</p>
             <p><strong>Service(s) Purchased:</strong> ${order.service_labels}</p>
             <p><strong>Total Price:</strong> $${order.total_amount.toFixed(2)}</p>
             <p><strong>Date:</strong> ${date}</p>
