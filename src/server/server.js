@@ -684,8 +684,7 @@ app.get('/api/getCompanyPastOrders', (req, res) => {
         LEFT JOIN Order_items oi 
         ON o.order_id = oi.order_id
         LEFT JOIN Services s 
-        ON oi.service_id = s.service_id
-        WHERE o.customer_id = ${orderId.customer.first_name}
+        ON oi.service_id = s.service_id       
         GROUP BY o.order_id
         ORDER BY o.purchase_date DESC
         
