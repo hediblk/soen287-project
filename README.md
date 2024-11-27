@@ -34,6 +34,10 @@ The **edit company services** page displays a list of current offered services. 
 
 
 ## Running the project
+### Run from the server
+The project is hosted on a server at `soen287.online` and can be accessed through [this link](https://soen287.online).
+
+### Run locally
 1. Clone the repository
 2. Run `npm install` to install the dependencies.
 3. To build the CSS file using tailwind, run:<br>`npx tailwindcss -i src/styles/input.css -o src/styles/output.css --watch`.
