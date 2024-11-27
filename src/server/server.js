@@ -1,6 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
-const multer = require('multer'); // used for the company logo upload, not implemented yet
+const multer = require('multer');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const app = express();
