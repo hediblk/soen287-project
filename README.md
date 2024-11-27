@@ -18,18 +18,20 @@ We are using **HTML**, **CSS**, and **JavaScript** for the frontend. **tailwindc
 ## User Guide
 **Please make sure to follow the `Running the project` section below to run the project properly.**
 
-We have included 2 types of users in the project: **Company** and **Customer**. Both have one hard coded account each (it is always possible to dynamically create new ones of course). The login credentials are as follows:<br>
+We have included 2 types of users in the project: **Company** and **Customer**. Both have one hard accounts (it is always possible to dynamically create new ones of course). The login credentials are as follows:<br>
 - **Company**: username: `admin1`, password: `go`<br>
 - **Customer 1**: username: `customer1`, password: `go`<br>
 - **Customer 2**: username: `customer2`, password: `go`<br>
 
-The main entry point of the project is the `landingPage.html` file. From there, you can navigate to the login/signup page and login with the credentials above for the **Company** account. Once logged in, you will see a dashboard that allows you to edit company information, add services, and view services sold. You can also logout from the dashboard.
+The main entry point of the project is the `/` route. From there, you can navigate to the login/signup page and login with the credentials above for the **Customer** account. This will take you to the customer dashboard where you can choose to purchase services, edit account information, and view past orders. You can also delete the account.
 
-The **edit company services** page displays a list of current offered services. You can add a new service by clicking the `Add Service` button. You can also edit or delete existing services. These services are stored in the local storage of the browser so the system actually keeps track of the services you add, edit, or delete.
+The **purchase services** page displays a list of services offered by the company. You can add as many services as you want to the cart and then proceed to checkout. The cart page displays the services you have added and allows you to remove them. You can also see the before tax price aswell as the total price (assuming a 15% tax rate). Once you are satisfied with your selection, you can choose to "pay now" or "pay later". You can proceed to checkout by clicking the `Order` button. This will simulate a purchase and display a confirmation message with the services selected, amount paid and date and time of purchase.
 
-From that page, you can navigate the **customer** side of the project by clicking the `Customer View` button in the top right corner. This will take you to the customer dashboard where you can view choose to purchase services, edit account information, and view purchased services. You can also logout from the dashboard.
 
-The **purchase services** page displays a list of services offered by the company (directly reads from local storage, so services manually added/edited previously will also be displayed). You can add as many services as you want to the cart and then proceed to checkout. The cart page displays the services you have added and allows you to remove them. You can also see the before tax price aswell as the total price (assuming a 15% tax rate). Once you are satisfied with your selection, you can proceed to checkout by clicking the `Pay` button. This will simulate a purchase and display a confirmation message with the services selected, amount paid and date and time of purchase.
+You can navigate to the **company** side of the project by going to the `/admin ` route. Once logged in, you will see a dashboard that allows you to edit account and company information (includingg company name and logo that dynamically change across the app), add services, and view services sold (you can view all services sold along with a list of ones that are still unpaid).
+
+The **edit company services** page displays a list of current offered services. You can add a new service by clicking the `Add Service` button. You can also edit or delete existing services. These services are automatically updated in the database so instantly available to customers for purchase.
+
 
 ## Running the project
 1. Clone the repository
